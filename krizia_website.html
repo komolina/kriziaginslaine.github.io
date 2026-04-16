@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Krizia Ginslaine — Coach</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --wine:#5C1A2E;--wine-deep:#3D0F1E;--wine-mid:#7D2640;--wine-light:#A84060;--wine-pale:#F2D9E0;
+  --champagne:#C8A96E;--champ-light:#E8D5A8;--champ-faint:#FAF5EC;
+  --emerald:#1A4A3A;--emerald-mid:#2D6B52;--emerald-light:#4A8F72;
+  --cream:#FDFAF5;--ivory:#F5EFE6;--ivory-deep:#EDE4D6;
+  --text:#1A0A0F;--text-body:#3D2030;--text-muted:#7A5565;--text-light:#B09AA5;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text-body);line-height:1.7;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,0.97);border-bottom:1px solid rgba(200,169,110,0.2);padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:500;color:var(--wine-deep);letter-spacing:3px;}
+.nav-links{display:flex;gap:1.75rem;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;}
+.nav-links a{color:var(--text-muted);transition:color 0.2s;}
+.nav-links a:hover{color:var(--wine);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.lang-toggle{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(200,169,110,0.4);color:var(--champagne);padding:0.4rem 0.9rem;cursor:pointer;background:transparent;font-family:'Inter',sans-serif;transition:all 0.2s;}
+.lang-toggle:hover{background:var(--champagne);color:var(--wine-deep);}
+.nav-cta{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;background:var(--wine);color:var(--cream);padding:0.6rem 1.4rem;font-weight:500;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:background 0.2s;}
+.nav-cta:hover{background:var(--wine-mid);}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--wine-deep);overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:9rem 4rem 5rem 5rem;position:relative;}
+.hero-left::after{content:'';position:absolute;right:0;top:15%;bottom:15%;width:1px;background:linear-gradient(to bottom,transparent,rgba(200,169,110,0.3),transparent);}
+.hero-eyebrow{font-size:0.63rem;letter-spacing:5px;text-transform:uppercase;color:var(--champagne);margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem;}
+.hero-eyebrow::before{content:'';width:30px;height:1px;background:var(--champagne);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,5.2rem);line-height:1.0;color:var(--cream);font-weight:400;margin-bottom:2rem;}
+.hero h1 em{font-style:italic;color:var(--champagne);}
+.hero-sub{font-size:0.93rem;color:rgba(253,250,245,0.58);max-width:400px;line-height:1.95;margin-bottom:3rem;font-weight:300;}
+.hero-actions{display:flex;flex-direction:column;gap:1rem;align-items:flex-start;}
+.btn-champ{background:var(--champagne);color:var(--wine-deep);padding:1.1rem 2.8rem;font-size:0.76rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;border:none;cursor:pointer;transition:background 0.2s;font-family:'Inter',sans-serif;}
+.btn-champ:hover{background:var(--champ-light);}
+.btn-ghost{background:transparent;color:var(--cream);padding:1rem 2.8rem;font-size:0.73rem;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(253,250,245,0.2);cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;}
+.btn-ghost:hover{border-color:var(--champagne);color:var(--champagne);}
+.hero-right{position:relative;background:var(--wine-mid);display:flex;align-items:stretch;overflow:hidden;}
+.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 30%,rgba(200,169,110,0.1) 0%,transparent 65%);z-index:1;}
+.hero-photo-frame{width:100%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;position:relative;z-index:2;min-height:580px;}
+.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;display:none;position:absolute;inset:0;}
+.upload-hint{color:rgba(253,250,245,0.3);font-size:0.73rem;letter-spacing:1px;text-align:center;font-family:'Inter',sans-serif;}
+.upload-icon{width:50px;height:50px;border:1px solid rgba(253,250,245,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.5rem;}
+#photoInput{display:none;}
+
+.truth-strip{background:var(--champagne);padding:1.1rem 2rem;display:flex;justify-content:center;align-items:center;gap:2.5rem;flex-wrap:wrap;}
+.truth-item{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--wine-deep);font-style:italic;display:flex;align-items:center;gap:1.5rem;}
+.truth-item::after{content:'·';font-style:normal;opacity:0.35;}
+.truth-item:last-child::after{display:none;}
+
+section{padding:6rem 5rem;}
+.container{max-width:1040px;margin:0 auto;}
+.eyebrow{font-size:0.63rem;letter-spacing:5px;text-transform:uppercase;color:var(--emerald-mid);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.eyebrow::before{content:'';width:25px;height:1px;background:var(--emerald-mid);}
+.eyebrow.gold{color:var(--champagne);}
+.eyebrow.gold::before{background:var(--champagne);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.1;color:var(--text);margin-bottom:1.25rem;font-weight:400;}
+.section-title em{font-style:italic;color:var(--wine);}
+.section-title.light{color:var(--cream);}
+.section-title.light em{color:var(--champagne);}
+.section-body{color:var(--text-muted);font-size:0.93rem;max-width:520px;line-height:1.9;}
+.champ-rule{width:50px;height:1.5px;background:var(--champagne);margin:2rem 0;}
+
+#for-you{background:var(--ivory);}
+.foryou-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3.5rem;background:var(--ivory-deep);}
+.foryou-card{background:var(--ivory);padding:2.5rem 2rem;border-top:3px solid transparent;transition:border-color 0.3s;}
+.foryou-card.featured{border-top-color:var(--wine);background:var(--wine-pale);}
+.foryou-trigger{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--text);margin-bottom:1rem;line-height:1.25;font-style:italic;}
+.foryou-card.featured .foryou-trigger{color:var(--wine-deep);}
+.foryou-answer{font-size:0.87rem;color:var(--text-muted);line-height:1.85;}
+.foryou-answer strong{color:var(--wine-mid);font-weight:500;}
+.foryou-tag{display:inline-block;font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;background:var(--wine);color:var(--cream);padding:0.25rem 0.75rem;margin-bottom:1rem;}
+.pressure-line{background:var(--wine-deep);padding:1.75rem 5rem;text-align:center;}
+.pressure-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:rgba(253,250,245,0.7);}
+.pressure-text em{color:var(--champagne);font-style:normal;}
+
+#mission{background:var(--emerald);padding:5.5rem 5rem;}
+.mission-inner{max-width:780px;margin:0 auto;text-align:center;}
+.mission-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--cream);font-style:italic;line-height:1.5;margin-bottom:2rem;}
+.mission-quote span{color:var(--champagne);}
+.mission-sub{font-size:0.88rem;color:rgba(253,250,245,0.5);line-height:1.95;max-width:560px;margin:0 auto 2.5rem;}
+.mission-pills{display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;}
+.pill{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(200,169,110,0.3);color:var(--champagne);padding:0.45rem 1.1rem;}
+
+#about{background:var(--cream);}
+.about-grid{display:grid;grid-template-columns:380px 1fr;gap:5rem;align-items:start;margin-top:3.5rem;}
+.about-photo-wrap{position:relative;}
+.about-photo{width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--ivory-deep);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;border:1px solid var(--ivory-deep);}
+.about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:none;}
+.about-photo-hint{font-size:0.73rem;color:var(--text-light);text-align:center;padding:0 1rem;}
+.about-accent{position:absolute;bottom:-16px;right:-16px;width:55%;height:55%;border:1.5px solid var(--champ-light);z-index:-1;}
+.pullquote{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--wine);border-left:2px solid var(--champagne);padding-left:1.5rem;margin:2rem 0;line-height:1.5;}
+.about-text p{font-size:0.93rem;color:var(--text-muted);line-height:1.95;margin-bottom:1rem;}
+.about-text p strong{color:var(--text-body);}
+.story-moment{background:var(--wine-pale);border-left:3px solid var(--wine);padding:1.5rem 1.75rem;margin:1.75rem 0;}
+.story-moment p{font-size:0.9rem;color:var(--wine-deep);line-height:1.85;margin:0;}
+.story-moment p em{font-family:'Cormorant Garamond',serif;font-size:1.05rem;}
+.experience-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--ivory-deep);margin-top:2rem;}
+.exp-card{background:var(--ivory);padding:1.25rem 1rem;text-align:center;}
+.exp-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--wine);line-height:1;}
+.exp-label{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.35rem;}
+#photoInput2{display:none;}
+
+#what-happens{background:var(--wine-deep);padding:6rem 5rem;}
+.steps-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:3.5rem;border:1px solid rgba(200,169,110,0.15);}
+.step-card{padding:2.5rem 1.6rem;border-right:1px solid rgba(200,169,110,0.15);}
+.step-card:last-child{border-right:none;}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:3.2rem;color:rgba(200,169,110,0.12);line-height:1;margin-bottom:1.25rem;}
+.step-label{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--champagne);margin-bottom:0.75rem;font-weight:500;}
+.step-body{font-size:0.82rem;color:rgba(253,250,245,0.5);line-height:1.85;}
+
+#ai-section{background:var(--emerald);}
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem;}
+.ai-intro{font-size:0.93rem;color:rgba(253,250,245,0.55);line-height:1.95;margin-bottom:2rem;}
+.ai-benefits{display:flex;flex-direction:column;gap:1.1rem;}
+.ai-benefit{display:flex;gap:1.25rem;align-items:flex-start;}
+.ai-benefit-dot{width:6px;height:6px;border-radius:50%;background:var(--champagne);flex-shrink:0;margin-top:0.6rem;}
+.ai-benefit-text{font-size:0.87rem;color:rgba(253,250,245,0.6);line-height:1.8;}
+.ai-benefit-text strong{color:var(--cream);font-weight:500;}
+.ai-connect-note{font-size:0.8rem;color:rgba(200,169,110,0.6);font-style:italic;margin-top:1.75rem;border-top:1px solid rgba(200,169,110,0.15);padding-top:1.25rem;}
+.tool-wrapper{background:rgba(0,0,0,0.25);border:1px solid rgba(200,169,110,0.2);overflow:hidden;}
+.tool-header{background:rgba(0,0,0,0.3);padding:1.1rem 1.75rem;display:flex;align-items:center;gap:1rem;}
+.tool-dot{width:7px;height:7px;border-radius:50%;background:var(--champagne);}
+.tool-title{font-size:0.66rem;letter-spacing:3px;text-transform:uppercase;color:rgba(253,250,245,0.4);}
+.tool-badge{margin-left:auto;font-size:0.6rem;letter-spacing:2px;color:var(--champagne);border:1px solid rgba(200,169,110,0.3);padding:0.2rem 0.65rem;text-transform:uppercase;}
+.chat-box{min-height:180px;max-height:260px;overflow-y:auto;padding:1.5rem 1.75rem;font-size:0.87rem;line-height:1.75;}
+.msg-ai{color:rgba(253,250,245,0.78);margin-bottom:1.25rem;}
+.msg-ai-label{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--champagne);display:block;margin-bottom:0.35rem;}
+.msg-user{color:rgba(253,250,245,0.55);margin-bottom:1.25rem;text-align:right;}
+.msg-user-label{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(253,250,245,0.3);display:block;margin-bottom:0.35rem;}
+.tool-footer{border-top:1px solid rgba(200,169,110,0.15);padding:0.9rem 1.25rem;display:flex;gap:0.75rem;align-items:center;}
+#focus-input{flex:1;border:none;background:transparent;color:rgba(253,250,245,0.78);font-size:0.87rem;font-family:'Inter',sans-serif;outline:none;}
+#focus-input::placeholder{color:rgba(253,250,245,0.22);}
+#focus-btn{background:var(--champagne);color:var(--wine-deep);border:none;padding:0.6rem 1.3rem;font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;transition:opacity 0.2s;}
+#focus-btn:hover{opacity:0.88;}
+#focus-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.typing-ind{padding:0.5rem 1.75rem;font-size:0.78rem;color:rgba(253,250,245,0.28);display:none;font-style:italic;}
+#questions-left{font-size:0.65rem;color:rgba(253,250,245,0.22);letter-spacing:1px;padding:0.5rem 1.75rem 0.75rem;text-align:right;}
+
+#pricing{background:var(--ivory);}
+.price-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3.5rem;}
+.price-context p{font-size:0.92rem;color:var(--text-muted);line-height:1.95;margin-bottom:1rem;}
+.price-context p strong{color:var(--text-body);}
+.testimonial-block{background:var(--cream);border:1px solid var(--ivory-deep);border-left:3px solid var(--champagne);padding:1.75rem;margin-top:2rem;}
+.testimonial-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--text-body);line-height:1.6;margin-bottom:1rem;}
+.testimonial-author{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);}
+.testimonial-author span{color:var(--wine);font-weight:500;}
+.add-testimonial{font-size:0.73rem;color:var(--text-light);font-style:italic;margin-top:0.75rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;}
+.add-testimonial:hover{color:var(--wine);}
+.price-card{background:var(--wine-deep);padding:3rem;position:relative;overflow:hidden;}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--champagne),var(--champ-light));}
+.price-eyebrow{font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--champagne);margin-bottom:1.25rem;}
+.price-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--cream);margin-bottom:0.5rem;font-style:italic;}
+.price-amount{font-family:'Cormorant Garamond',serif;font-size:4.5rem;color:var(--champagne);line-height:1;margin:1.25rem 0 0.4rem;}
+.price-amount sup{font-size:1.8rem;vertical-align:top;margin-top:0.75rem;display:inline-block;}
+.price-duration{font-size:0.7rem;letter-spacing:2px;color:rgba(253,250,245,0.28);text-transform:uppercase;margin-bottom:1.5rem;}
+.price-process{background:rgba(200,169,110,0.06);border:1px solid rgba(200,169,110,0.1);padding:1.25rem;margin-bottom:1.75rem;}
+.price-process-title{font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(200,169,110,0.55);margin-bottom:0.75rem;}
+.price-process-item{font-size:0.82rem;color:rgba(253,250,245,0.55);padding:0.4rem 0;display:flex;align-items:flex-start;gap:0.6rem;border-bottom:1px solid rgba(200,169,110,0.07);}
+.price-process-item:last-child{border-bottom:none;padding-bottom:0;}
+.price-process-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--champagne);flex-shrink:0;margin-top:0.6rem;}
+.btn-champ-full{width:100%;background:var(--champagne);color:var(--wine-deep);padding:1.15rem;font-size:0.76rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;border:none;cursor:pointer;transition:opacity 0.2s;font-family:'Inter',sans-serif;}
+.btn-champ-full:hover{opacity:0.88;}
+.price-guarantee{font-size:0.75rem;color:rgba(253,250,245,0.25);text-align:center;margin-top:1rem;line-height:1.6;}
+
+/* RESET EXPERIENCE — Premium Section */
+#reset-experience{background:var(--wine-deep);padding:0;}
+.re-inner{display:grid;grid-template-columns:1fr 1fr;min-height:520px;}
+.re-left{padding:6rem 4rem 6rem 5rem;display:flex;flex-direction:column;justify-content:center;position:relative;}
+.re-left::after{content:'';position:absolute;right:0;top:10%;bottom:10%;width:1px;background:linear-gradient(to bottom,transparent,rgba(200,169,110,0.2),transparent);}
+.re-badge{font-size:0.6rem;letter-spacing:5px;text-transform:uppercase;color:var(--champagne);border:1px solid rgba(200,169,110,0.25);padding:0.4rem 1rem;display:inline-block;margin-bottom:2.5rem;}
+.re-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);line-height:1.0;color:var(--cream);font-weight:400;margin-bottom:1.5rem;}
+.re-title em{font-style:italic;color:var(--champagne);}
+.re-hook{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:rgba(253,250,245,0.55);margin-bottom:2rem;line-height:1.6;}
+.re-body{font-size:0.88rem;color:rgba(253,250,245,0.4);line-height:1.95;margin-bottom:2.5rem;max-width:380px;}
+.re-body em{color:rgba(200,169,110,0.7);font-style:normal;}
+.re-right{padding:6rem 5rem 6rem 4rem;display:flex;flex-direction:column;justify-content:center;}
+.re-form-label{font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:rgba(200,169,110,0.5);margin-bottom:2rem;}
+.re-input{width:100%;background:rgba(255,255,255,0.04);border:none;border-bottom:1px solid rgba(200,169,110,0.2);color:var(--cream);padding:0.85rem 0;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;margin-bottom:1.5rem;}
+.re-input:focus{border-bottom-color:var(--champagne);}
+.re-input::placeholder{color:rgba(253,250,245,0.2);}
+.re-cta{width:100%;background:transparent;border:1px solid rgba(200,169,110,0.4);color:var(--champagne);padding:1.15rem;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:all 0.25s;margin-bottom:1.25rem;}
+.re-cta:hover{background:rgba(200,169,110,0.08);border-color:var(--champagne);}
+.re-note{font-size:0.75rem;color:rgba(253,250,245,0.2);line-height:1.7;text-align:center;}
+.re-submitted{display:none;text-align:center;padding:2rem;}
+.re-submitted p{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--champagne);line-height:1.6;}
+.re-pillars{display:flex;flex-direction:column;gap:1.25rem;margin-bottom:2.5rem;}
+.re-pillar{display:flex;gap:1rem;align-items:flex-start;}
+.re-pillar-dot{width:5px;height:5px;border-radius:50%;background:rgba(200,169,110,0.4);flex-shrink:0;margin-top:0.6rem;}
+.re-pillar-text{font-size:0.83rem;color:rgba(253,250,245,0.4);line-height:1.7;}
+.re-pillar-text strong{color:rgba(253,250,245,0.65);font-weight:500;}
+
+#contenido{background:var(--wine-deep);padding:6rem 5rem;}
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(200,169,110,0.07);margin-bottom:2px;}
+.content-card{background:var(--wine-deep);padding:2.5rem;border:1px solid rgba(200,169,110,0.1);}
+.content-card-eyebrow{font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--champagne);margin-bottom:1.25rem;}
+.content-card h3{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--cream);margin-bottom:0.75rem;font-style:italic;line-height:1.25;}
+.content-card p{font-size:0.83rem;color:rgba(253,250,245,0.42);line-height:1.85;margin-bottom:1.5rem;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,0.07);margin-top:2px;}
+.blog-card{background:var(--wine-deep);padding:2rem;border:1px solid rgba(200,169,110,0.1);display:block;transition:border-color 0.2s;}
+.blog-card:hover{border-color:rgba(200,169,110,0.35);}
+.blog-part{font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;color:rgba(200,169,110,0.4);margin-bottom:0.75rem;}
+.blog-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--cream);line-height:1.35;margin-bottom:0.6rem;}
+.blog-desc{font-size:0.78rem;color:rgba(253,250,245,0.35);line-height:1.7;margin-bottom:1rem;}
+.blog-link{font-size:0.72rem;color:rgba(200,169,110,0.55);letter-spacing:1px;}
+
+#shops{background:var(--cream);}
+.shops-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:3.5rem;background:var(--ivory-deep);}
+.shop-card{background:var(--cream);padding:3rem 2.5rem;}
+.shop-eyebrow{font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--emerald-mid);margin-bottom:1.25rem;}
+.shop-card h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--text);margin-bottom:0.75rem;font-style:italic;}
+.shop-card p{font-size:0.87rem;color:var(--text-muted);line-height:1.9;margin-bottom:2rem;}
+.btn-wine{background:var(--wine);color:var(--cream);padding:0.9rem 2rem;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:background 0.2s;display:inline-block;font-weight:500;}
+.btn-wine:hover{background:var(--wine-mid);}
+
+#final-cta{background:var(--wine-deep);padding:8rem 5rem;text-align:center;position:relative;overflow:hidden;}
+#final-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,169,110,0.05);}
+#final-cta::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:450px;height:450px;border-radius:50%;border:1px solid rgba(200,169,110,0.04);}
+.cta-eyebrow{font-size:0.63rem;letter-spacing:5px;text-transform:uppercase;color:var(--champagne);margin-bottom:2rem;position:relative;z-index:1;}
+#final-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,4.8rem);color:var(--cream);margin-bottom:1.25rem;font-weight:400;line-height:1.05;position:relative;z-index:1;}
+#final-cta h2 em{font-style:italic;color:var(--champagne);}
+#final-cta p{font-size:0.92rem;color:rgba(253,250,245,0.38);margin-bottom:3rem;position:relative;z-index:1;}
+
+#booking{background:var(--ivory);}
+.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3.5rem;}
+.booking-pullquote{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-style:italic;color:var(--wine);border-left:2px solid var(--champagne);padding-left:1.5rem;line-height:1.5;margin-bottom:2rem;}
+.booking-left p{font-size:0.88rem;color:var(--text-muted);line-height:1.95;margin-bottom:0.85rem;}
+.booking-process{background:var(--cream);border:1px solid var(--ivory-deep);padding:1.5rem;margin-top:1.5rem;}
+.booking-process-title{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem;}
+.booking-process-step{display:flex;gap:1rem;align-items:flex-start;padding:0.5rem 0;border-bottom:1px solid var(--ivory-deep);font-size:0.83rem;color:var(--text-muted);}
+.booking-process-step:last-child{border-bottom:none;padding-bottom:0;}
+.booking-step-n{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--champagne);flex-shrink:0;width:20px;line-height:1.4;}
+.form-group{margin-bottom:1.5rem;}
+.form-group label{display:block;font-size:0.63rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.6rem;}
+.form-group input,.form-group textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--ivory-deep);color:var(--text-body);padding:0.6rem 0;font-size:0.93rem;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;}
+.form-group input:focus,.form-group textarea:focus{border-bottom-color:var(--champagne);}
+.form-group textarea{height:80px;resize:none;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-light);}
+.submit-msg{display:none;color:var(--emerald-mid);font-size:0.9rem;margin-top:1.25rem;font-family:'Cormorant Garamond',serif;font-style:italic;}
+.booking-note{font-size:0.75rem;color:var(--text-light);margin-top:1.25rem;line-height:1.7;}
+
+footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(200,169,110,0.1);}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(253,250,245,0.38);letter-spacing:3px;}
+.footer-links{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:center;}
+.footer-links a{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(253,250,245,0.28);transition:color 0.2s;}
+.footer-links a:hover{color:var(--champagne);}
+.footer-copy{font-size:0.7rem;color:rgba(253,250,245,0.2);}
+.footer-champ{color:var(--champagne);}
+
+.t-edit{display:none;position:fixed;inset:0;background:rgba(61,15,30,0.85);z-index:500;align-items:center;justify-content:center;}
+.t-edit.open{display:flex;}
+.t-modal{background:var(--cream);padding:2.5rem;max-width:500px;width:90%;}
+.t-modal h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--wine-deep);margin-bottom:1.5rem;}
+.t-modal textarea{width:100%;border:1px solid var(--ivory-deep);padding:0.75rem;font-family:'Inter',sans-serif;font-size:0.9rem;height:100px;outline:none;margin-bottom:1rem;resize:none;color:var(--text-body);}
+.t-modal input{width:100%;border:1px solid var(--ivory-deep);padding:0.75rem;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;margin-bottom:1.5rem;color:var(--text-body);}
+.t-modal-btns{display:flex;gap:1rem;}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  section,#what-happens,#final-cta,#mission,#contenido{padding:4rem 1.5rem;}
+  .hero{grid-template-columns:1fr;}
+  .hero-left{padding:7rem 1.5rem 3rem;}
+  .hero-left::after{display:none;}
+  .hero-right{min-height:360px;}
+  .about-grid,.booking-grid,.price-wrapper,.ai-grid,.re-inner{grid-template-columns:1fr;}
+  .re-left,.re-right{padding:3rem 1.5rem;}
+  .re-left::after{display:none;}
+  .steps-grid{grid-template-columns:1fr 1fr;}
+  .step-card{border-right:none;border-bottom:1px solid rgba(200,169,110,0.15);}
+  .foryou-grid,.shops-grid,.content-grid,.blog-grid,.experience-grid{grid-template-columns:1fr;}
+  .pressure-line{padding:1.5rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="t-edit" id="tEdit">
+  <div class="t-modal">
+    <h3>Agregar testimonio</h3>
+    <textarea id="tText" placeholder="Escribe el testimonio aquí..."></textarea>
+    <input type="text" id="tAuthor" placeholder="Nombre — Título o descripción"/>
+    <div class="t-modal-btns">
+      <button class="btn-champ" style="font-size:0.75rem;padding:0.8rem 1.5rem;" onclick="saveTestimonial()">Guardar</button>
+      <button style="font-size:0.75rem;padding:0.8rem 1.5rem;background:transparent;border:1px solid rgba(92,26,46,0.3);color:var(--wine);cursor:pointer;font-family:'Inter',sans-serif;" onclick="closeTestimonial()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-logo">KRIZIA GINSLAINE</div>
+  <div class="nav-links">
+    <a href="#about" data-es="Sobre mí" data-en="About">Sobre mí</a>
+    <a href="#for-you" data-es="¿Eres tú?" data-en="Is This You?">¿Eres tú?</a>
+    <a href="#pricing" data-es="Sesión" data-en="Session">Sesión</a>
+    <a href="#enfoque-dorado" data-es="Enfoque Dorado" data-en="Enfoque Dorado">Enfoque Dorado</a>
+    <a href="#reset-experience" data-es="The Reset Experience" data-en="The Reset Experience">The Reset Experience</a>
+    <a href="#booking" data-es="Reservar" data-en="Book">Reservar</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-toggle" onclick="toggleLang()">English</button>
+    <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" data-es="Reserva tu sesión" data-en="Book Your Session">Reserva tu sesión</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow" data-es="Ingeniera · Coach · Puerto Rico" data-en="Engineer · Coach · Puerto Rico">Ingeniera · Coach · Puerto Rico</div>
+    <h1 data-es="Claridad.<br/>Enfoque.<br/><em>Movimiento.</em>" data-en="Clarity.<br/>Focus.<br/><em>Forward.</em>">Claridad.<br/>Enfoque.<br/><em>Movimiento.</em></h1>
+    <p class="hero-sub" data-es="En una sesión de 60 minutos, identificamos tu bloqueo real, cortamos el ruido y construimos el plan que ejecutas hoy." data-en="In one 60-minute session, we identify your real block, cut the noise, and build the plan you execute today.">En una sesión de 60 minutos, identificamos tu bloqueo real, cortamos el ruido y construimos el plan que ejecutas hoy.</p>
+    <div class="hero-actions">
+      <a href="#booking"><button class="btn-champ" data-es="Reserva tu Reset Session — $147" data-en="Book Your Reset Session — $147">Reserva tu Reset Session — $147</button></a>
+      <a href="#reset-experience"><button class="btn-ghost" data-es="The Reset Experience — Lista de espera" data-en="The Reset Experience — Join Waitlist">The Reset Experience — Lista de espera</button></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-frame" id="heroPhotoBox" onclick="document.getElementById('photoInput').click()">
+      <div class="upload-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(253,250,245,0.3)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="upload-hint" data-es="Haz clic para subir tu foto" data-en="Click to upload your photo">Haz clic para subir tu foto</div>
+      <img id="heroImg" src="" alt="Krizia Ginslaine"/>
+    </div>
+    <input type="file" id="photoInput" accept="image/*" onchange="loadHeroPhoto(event)"/>
+  </div>
+</section>
+
+<div class="truth-strip">
+  <div class="truth-item" data-es="Tu negocio debe trabajar para ti" data-en="Your business should work for you">Tu negocio debe trabajar para ti</div>
+  <div class="truth-item" data-es="No tú para él" data-en="Not you for it">No tú para él</div>
+  <div class="truth-item" data-es="Una sesión lo cambia todo" data-en="One session changes everything">Una sesión lo cambia todo</div>
+</div>
+
+<section id="for-you">
+  <div class="container">
+    <div class="eyebrow" data-es="¿Eres tú?" data-en="Is This You?">¿Eres tú?</div>
+    <h2 class="section-title" data-es="Lo haces todo.<br/><em>Y estás agotada de eso.</em>" data-en="You do everything.<br/><em>And you're exhausted by it.</em>">Lo haces todo.<br/><em>Y estás agotada de eso.</em></h2>
+    <div class="champ-rule"></div>
+    <div class="foryou-grid">
+      <div class="foryou-card">
+        <div class="foryou-trigger" data-es="Te sientes abrumada." data-en="You feel overwhelmed.">Te sientes abrumada.</div>
+        <div class="foryou-answer" data-es="Demasiadas cosas. Sin punto de partida. Te despiertas cansada antes de que empiece el día. Simplificamos tu sistema y cortamos el ruido para que puedas <strong>respirar y avanzar</strong> al mismo tiempo." data-en="Too many things. No starting point. You wake up tired before the day begins. We simplify your system and cut the noise so you can <strong>breathe and move</strong> at the same time.">Demasiadas cosas. Sin punto de partida. Te despiertas cansada antes de que empiece el día. Simplificamos tu sistema y cortamos el ruido para que puedas <strong>respirar y avanzar</strong> al mismo tiempo.</div>
+      </div>
+      <div class="foryou-card featured">
+        <div class="foryou-tag" data-es="La más común" data-en="Most common">La más común</div>
+        <div class="foryou-trigger" data-es="Sabes qué hacer pero no lo estás haciendo." data-en="You know what to do but you're not doing it.">Sabes qué hacer pero no lo estás haciendo.</div>
+        <div class="foryou-answer" data-es="Esta es la más dolorosa. Tienes el conocimiento. Tienes el talento. Pero algo te frena. La brecha no es información — es energía y enfoque. En 60 minutos <strong>cerramos esa brecha.</strong>" data-en="This is the most painful one. You have the knowledge. You have the talent. But something stops you. The gap is not information — it is energy and focus. In 60 minutes <strong>we close that gap.</strong>">Esta es la más dolorosa. Tienes el conocimiento. Tienes el talento. Pero algo te frena. La brecha no es información — es energía y enfoque. En 60 minutos <strong>cerramos esa brecha.</strong></div>
+      </div>
+      <div class="foryou-card">
+        <div class="foryou-trigger" data-es="Piensas demasiado todo." data-en="You're overthinking everything.">Piensas demasiado todo.</div>
+        <div class="foryou-answer" data-es="Planificas, analizas, te preparas. Pero no te mueves. El problema no es información — es claridad. Construimos tu próximo paso y lo hacemos <strong>imposible de ignorar.</strong>" data-en="You plan, analyze, prepare. But you don't move. The problem is not information — it is clarity. We build your next step and make it <strong>impossible to ignore.</strong>">Planificas, analizas, te preparas. Pero no te mueves. El problema no es información — es claridad. Construimos tu próximo paso y lo hacemos <strong>imposible de ignorar.</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pressure-line">
+  <div class="pressure-text" data-es='Si nada cambia hoy... en 3 meses estarás <em>exactamente en el mismo lugar.</em>' data-en='If nothing changes today... in 3 months you will be <em>exactly in the same place.</em>'>Si nada cambia hoy... en 3 meses estarás <em>exactamente en el mismo lugar.</em></div>
+</div>
+
+<section id="mission">
+  <div class="mission-inner">
+    <div class="eyebrow gold" style="justify-content:center;" data-es="La misión" data-en="The Mission">La misión</div>
+    <div class="mission-quote" data-es='"Las mujeres latinas están <span>listas para liderar</span> la era de la inteligencia artificial. Solo necesitan a alguien que les muestre cómo."' data-en='"Latina women are <span>ready to lead</span> the age of artificial intelligence. They just need someone to show them how."'>"Las mujeres latinas están <span>listas para liderar</span> la era de la inteligencia artificial. Solo necesitan a alguien que les muestre cómo."</div>
+    <p class="mission-sub" data-es="Soy de Puerto Rico. Entiendo la energía que ponemos en todo. El talento que tenemos. Y lo sola que te puedes sentir cuando intentas crecer tu negocio sin las herramientas correctas. Aquí cambia eso." data-en="I'm from Puerto Rico. I understand the energy we put into everything. The talent we have. And how alone you can feel when trying to grow your business without the right tools. That changes here.">Soy de Puerto Rico. Entiendo la energía que ponemos en todo. El talento que tenemos. Y lo sola que te puedes sentir cuando intentas crecer tu negocio sin las herramientas correctas. Aquí cambia eso.</p>
+    <div class="mission-pills">
+      <div class="pill" data-es="Mujeres latinas" data-en="Latina Women">Mujeres latinas</div>
+      <div class="pill" data-es="Empresarias" data-en="Entrepreneurs">Empresarias</div>
+      <div class="pill" data-es="Inteligencia artificial" data-en="Artificial Intelligence">Inteligencia artificial</div>
+      <div class="pill" data-es="Productividad real" data-en="Real Productivity">Productividad real</div>
+      <div class="pill" data-es="Puerto Rico & diáspora" data-en="Puerto Rico & Diaspora">Puerto Rico & diáspora</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="about-photo" id="aboutPhotoBox" onclick="document.getElementById('photoInput2').click()">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(122,85,101,0.3)" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <div class="about-photo-hint" data-es="Haz clic para subir tu foto" data-en="Click to upload your photo">Haz clic para subir tu foto</div>
+          <img id="aboutImg" src="" alt="Krizia Ginslaine"/>
+        </div>
+        <div class="about-accent"></div>
+        <input type="file" id="photoInput2" accept="image/*" onchange="loadAboutPhoto(event)"/>
+        <div class="experience-grid">
+          <div class="exp-card"><div class="exp-num">14+</div><div class="exp-label" data-es="Años de experiencia" data-en="Years experience">Años de experiencia</div></div>
+          <div class="exp-card"><div class="exp-num">150+</div><div class="exp-label" data-es="Personas lideradas" data-en="People led">Personas lideradas</div></div>
+          <div class="exp-card"><div class="exp-num">3</div><div class="exp-label" data-es="Proyectos propios" data-en="Own projects">Proyectos propios</div></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="eyebrow" data-es="Con quién trabajas" data-en="Who You're Working With">Con quién trabajas</div>
+        <h2 class="section-title" data-es="Ingeniera. Madre a los 17.<br/><em>Decidí que había otra forma.</em>" data-en="Engineer. Mother at 17.<br/><em>I decided there was another way.</em>">Ingeniera. Madre a los 17.<br/><em>Decidí que había otra forma.</em></h2>
+        <div class="champ-rule"></div>
+        <div class="story-moment">
+          <p data-es='<em>"Fui madre a los 17 años. Estudiaba y trabajaba al mismo tiempo. Por años creí que para crecer había que matarse trabajando. Que el sacrificio era el precio del éxito. Hasta que un día dije: no más."</em>' data-en='<em>"I became a mother at 17. I was studying and working at the same time. For years I believed that to grow, you had to grind yourself into the ground. That sacrifice was the price of success. Until one day I said: no more."</em>'><em>"Fui madre a los 17 años. Estudiaba y trabajaba al mismo tiempo. Por años creí que para crecer había que matarse trabajando. Que el sacrificio era el precio del éxito. Hasta que un día dije: no más."</em></p>
+        </div>
+        <p data-es="Ese camino me llevó a la ingeniería, donde descubrí que me apasiona mejorar procesos y crear sistemas que funcionan. Lideré equipos de más de <strong>150 personas</strong> en entornos de alta presión, gestioné operaciones completas y aprendí desde adentro cómo se construye un negocio que no depende de que estés en todo." data-en="That journey led me to engineering, where I discovered my passion for improving processes and creating systems that work. I led teams of over <strong>150 people</strong> in high-pressure environments, managed full operations, and learned from the inside how you build a business that doesn't depend on you being everywhere.">Ese camino me llevó a la ingeniería, donde descubrí que me apasiona mejorar procesos y crear sistemas que funcionan. Lideré equipos de más de <strong>150 personas</strong> en entornos de alta presión, gestioné operaciones completas y aprendí desde adentro cómo se construye un negocio que no depende de que estés en todo.</p>
+        <p data-es="Después de <strong>14 años</strong>, entendí algo que nadie te dice: el problema no es que no estés haciendo suficiente. Es que estás operando sin un sistema alineado a tu energía." data-en="After <strong>14 years</strong>, I understood something nobody tells you: the problem is not that you are not doing enough. It is that you are operating without a system aligned to your energy.">Después de <strong>14 años</strong>, entendí algo que nadie te dice: el problema no es que no estés haciendo suficiente. Es que estás operando sin un sistema alineado a tu energía.</p>
+        <p data-es="Hoy combino estrategia de negocio, manejo de energía e inteligencia artificial para ayudarte a generar más sin perderte en el proceso." data-en="Today I combine business strategy, energy management, and artificial intelligence to help you generate more without losing yourself in the process.">Hoy combino estrategia de negocio, manejo de energía e inteligencia artificial para ayudarte a generar más sin perderte en el proceso.</p>
+        <p data-es="No necesitas hacer más. Necesitas claridad. Necesitas dirección. Necesitas moverte." data-en="You don't need to do more. You need clarity. You need direction. You need to move." style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--wine);font-style:italic;line-height:1.6;">No necesitas hacer más. Necesitas claridad. Necesitas dirección. Necesitas moverte.</p>
+        <a href="#booking" style="display:inline-block;margin-top:1.5rem;"><button class="btn-champ" data-es="Reserva tu sesión" data-en="Book Your Session">Reserva tu sesión</button></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="what-happens">
+  <div class="container">
+    <div class="eyebrow gold" data-es="La sesión" data-en="The Session">La sesión</div>
+    <h2 class="section-title light" data-es="No doy discursos motivacionales.<br/><em>Te ayudo a moverte.</em>" data-en="I don't do motivation speeches.<br/><em>I help you move.</em>">No doy discursos motivacionales.<br/><em>Te ayudo a moverte.</em></h2>
+    <div class="champ-rule"></div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">01</div><div class="step-label" data-es="El bloqueo real" data-en="The real block">El bloqueo real</div><div class="step-body" data-es="No el superficial. El que lleva meses deteniéndote sin que lo hayas nombrado todavía." data-en="Not the surface one. The one that has been stopping you for months without you naming it yet.">No el superficial. El que lleva meses deteniéndote sin que lo hayas nombrado todavía.</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-label" data-es="Cortar el ruido" data-en="Cut the noise">Cortar el ruido</div><div class="step-body" data-es="Todo lo que no te mueve hacia adelante se elimina. Creamos espacio para lo que realmente importa." data-en="Everything not moving you forward gets cut. We create space for what actually matters.">Todo lo que no te mueve hacia adelante se elimina. Creamos espacio para lo que realmente importa.</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-label" data-es="Claridad de prioridades" data-en="Clarity on priorities">Claridad de prioridades</div><div class="step-body" data-es="Sales sabiendo qué importa y en qué orden exacto. Sin más adivinar por dónde empezar." data-en="You leave knowing what matters and in what exact order. No more guessing where to start.">Sales sabiendo qué importa y en qué orden exacto. Sin más adivinar por dónde empezar.</div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-label" data-es="Tu plan de ejecución" data-en="Your execution plan">Tu plan de ejecución</div><div class="step-body" data-es="Simple. Directo. Construido para tu energía y tu realidad — no para una versión idealizada de ti." data-en="Simple. Direct. Built for your energy and your reality — not for an idealized version of you.">Simple. Directo. Construido para tu energía y tu realidad — no para una versión idealizada de ti.</div></div>
+      <div class="step-card"><div class="step-num">05</div><div class="step-label" data-es="Acción hoy" data-en="Action today">Acción hoy</div><div class="step-body" data-es="Sales con pasos claros que ejecutas hoy. No algún día. Hoy." data-en="You leave with clear steps to execute today. Not someday. Today.">Sales con pasos claros que ejecutas hoy. No algún día. Hoy.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="ai-section">
+  <div class="container">
+    <div class="eyebrow gold" data-es="IA dentro del sistema" data-en="AI within the system">IA dentro del sistema</div>
+    <h2 class="section-title light" data-es="La IA no es una herramienta aparte.<br/><em>Es parte de cómo operamos.</em>" data-en="AI is not a separate tool.<br/><em>It is part of how we operate.</em>">La IA no es una herramienta aparte.<br/><em>Es parte de cómo operamos.</em></h2>
+    <div class="champ-rule"></div>
+    <div class="ai-grid">
+      <div>
+        <p class="ai-intro" data-es="En cada sesión, en cada sistema que construimos juntas, la inteligencia artificial está integrada como parte del proceso — no como un add-on ni como tecnología separada. Es la diferencia entre trabajar más duro y trabajar de forma inteligente." data-en="In every session, in every system we build together, artificial intelligence is integrated as part of the process — not as an add-on or separate technology. It is the difference between working harder and working smart.">En cada sesión, en cada sistema que construimos juntas, la inteligencia artificial está integrada como parte del proceso — no como un add-on ni como tecnología separada. Es la diferencia entre trabajar más duro y trabajar de forma inteligente.</p>
+        <div class="ai-benefits">
+          <div class="ai-benefit"><div class="ai-benefit-dot"></div><div class="ai-benefit-text" data-es="<strong>Automatiza lo repetitivo</strong> y recupera 2 a 3 horas de tu día" data-en="<strong>Automate the repetitive</strong> and reclaim 2 to 3 hours of your day"><strong>Automatiza lo repetitivo</strong> y recupera 2 a 3 horas de tu día</div></div>
+          <div class="ai-benefit"><div class="ai-benefit-dot"></div><div class="ai-benefit-text" data-es="<strong>Crea contenido 10 veces más rápido</strong> sin perder tu voz auténtica" data-en="<strong>Create content 10x faster</strong> without losing your authentic voice"><strong>Crea contenido 10 veces más rápido</strong> sin perder tu voz auténtica</div></div>
+          <div class="ai-benefit"><div class="ai-benefit-dot"></div><div class="ai-benefit-text" data-es="<strong>Toma mejores decisiones</strong> con claridad en minutos" data-en="<strong>Make better decisions</strong> with clarity in minutes"><strong>Toma mejores decisiones</strong> con claridad en minutos</div></div>
+          <div class="ai-benefit"><div class="ai-benefit-dot"></div><div class="ai-benefit-text" data-es="<strong>Escala sin contratar</strong> — más resultado con los mismos recursos" data-en="<strong>Scale without hiring</strong> — more results with the same resources"><strong>Escala sin contratar</strong> — más resultado con los mismos recursos</div></div>
+        </div>
+        <p class="ai-connect-note" data-es="Alineamos tu trabajo y tus decisiones con tu energía real — no con disciplina forzada." data-en="We align your work and decisions with your real energy — not forced discipline.">Alineamos tu trabajo y tus decisiones con tu energía real — no con disciplina forzada.</p>
+      </div>
+      <div>
+        <div class="eyebrow gold" style="margin-bottom:1.5rem;" data-es="Vista previa · Krizia GPT" data-en="Preview · Krizia GPT">Vista previa · Krizia GPT</div>
+        <div class="tool-wrapper">
+          <div class="tool-header"><div class="tool-dot"></div><div class="tool-title" data-es="Krizia GPT — Coach de Enfoque" data-en="Krizia GPT — Focus Coach">Krizia GPT — Coach de Enfoque</div><div class="tool-badge" data-es="Gratis" data-en="Free">Gratis</div></div>
+          <div class="chat-box" id="chatBox">
+            <span class="msg-ai-label">Krizia GPT</span>
+            <div class="msg-ai" id="gpt-intro">Cuéntame qué estás enfrentando ahora mismo. Tu tarea, tu bloqueo, tu nivel de energía. Te doy algo que puedes hacer de inmediato.</div>
+          </div>
+          <div class="typing-ind" id="typingIndicator">Pensando...</div>
+          <div class="tool-footer">
+            <input type="text" id="focus-input" placeholder="¿En qué estás atascada ahora mismo?"/>
+            <button id="focus-btn" onclick="sendFocusMessage()" data-es="Enviar" data-en="Send">Enviar</button>
+          </div>
+          <div id="questions-left">3 de 3 preguntas disponibles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="eyebrow" data-es="La inversión" data-en="The Investment">La inversión</div>
+    <h2 class="section-title" data-es="Una sesión.<br/><em>Una decisión.</em>" data-en="One session.<br/><em>One decision.</em>">Una sesión.<br/><em>Una decisión.</em></h2>
+    <div class="champ-rule"></div>
+    <div class="price-wrapper">
+      <div class="price-context">
+        <p data-es="La mayoría de las empresarias pasan meses abrumadas, pensando demasiado, sin moverse. Gastan tiempo, energía y dinero quedándose exactamente donde están." data-en="Most entrepreneurs spend months overwhelmed, overthinking, not moving. They waste time, energy, and money staying exactly where they are.">La mayoría de las empresarias pasan meses abrumadas, pensando demasiado, sin moverse. Gastan tiempo, energía y dinero quedándose exactamente donde están.</p>
+        <p data-es="<strong>Una sesión de 60 minutos cuesta menos que quedarte donde estás por un mes más.</strong>" data-en="<strong>One 60-minute session costs less than staying where you are for another month.</strong>"><strong>Una sesión de 60 minutos cuesta menos que quedarte donde estás por un mes más.</strong></p>
+        <div class="testimonial-block" id="testimonialBlock">
+          <div class="testimonial-text" id="testimonialText">"Entré sin saber por dónde empezar. Salí con un plan claro y lo ejecuté esa misma semana. Fue la mejor inversión que hice en mi negocio este año."</div>
+          <div class="testimonial-author" id="testimonialAuthor">— <span>María R.</span> Empresaria · Puerto Rico</div>
+        </div>
+        <div class="add-testimonial" onclick="openTestimonial()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          <span data-es="Actualizar testimonio" data-en="Update testimonial">Actualizar testimonio</span>
+        </div>
+      </div>
+      <div class="price-card">
+        <div class="price-eyebrow">Reset Session</div>
+        <div class="price-name" data-es="Claridad total en 60 minutos" data-en="Full Clarity in 60 Minutes">Claridad total en 60 minutos</div>
+        <div class="price-amount"><sup>$</sup>147</div>
+        <div class="price-duration" data-es="60 minutos · 1 a 1 con Krizia · Zoom" data-en="60 minutes · 1 on 1 with Krizia · Zoom">60 minutos · 1 a 1 con Krizia · Zoom</div>
+        <div class="price-process">
+          <div class="price-process-title" data-es="¿Cómo funciona?" data-en="How does it work?">¿Cómo funciona?</div>
+          <div class="price-process-item" data-es="Completas el formulario abajo" data-en="Fill out the form below">Completas el formulario abajo</div>
+          <div class="price-process-item" data-es="Krizia te confirma en 24 horas" data-en="Krizia confirms within 24 hours">Krizia te confirma en 24 horas</div>
+          <div class="price-process-item" data-es="Recibes el link de pago y el Zoom" data-en="You receive the payment link and Zoom">Recibes el link de pago y el Zoom</div>
+          <div class="price-process-item" data-es="Nos conectamos y trabajamos" data-en="We connect and get to work">Nos conectamos y trabajamos</div>
+        </div>
+        <a href="#booking"><button class="btn-champ-full" data-es="Reserva tu Reset Session" data-en="Book Your Reset Session">Reserva tu Reset Session</button></a>
+        <p class="price-guarantee">Zoom · Pago seguro · Confirmación en 24h</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE RESET EXPERIENCE -->
+<!-- ENFOQUE DORADO -->
+<section id="enfoque-dorado" style="background:var(--ivory);padding:6rem 5rem;">
+  <div class="container">
+    <div class="eyebrow" data-es="El siguiente paso" data-en="The next step">El siguiente paso</div>
+    <h2 class="section-title" data-es="El Reset te dio claridad.<br/><em>El Enfoque Dorado es donde lo construimos.</em>" data-en="The Reset gave you clarity.<br/><em>Enfoque Dorado is where we build it.</em>">El Reset te dio claridad.<br/><em>El Enfoque Dorado es donde lo construimos.</em></h2>
+    <div class="champ-rule"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:1rem;">
+      <div>
+        <p style="font-size:1.05rem;color:var(--text-body);line-height:1.95;margin-bottom:1.5rem;font-family:'Cormorant Garamond',serif;font-style:italic;">
+          "Aquí aplicamos el sistema que corre alrededor de tu vida. Recuperamos el control de tu negocio. Le dices adiós a las listas de tareas interminables."
+        </p>
+        <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.95;margin-bottom:1rem;" data-es="Implementamos automatizaciones, tecnología, colaboraciones e inteligencia artificial directamente en tu negocio — para que seas más eficiente y manejes tu tiempo de una manera que finalmente tenga sentido." data-en="We implement automations, technology, collaborations and artificial intelligence directly into your business — so you operate more efficiently and manage your time in a way that finally makes sense.">Implementamos automatizaciones, tecnología, colaboraciones e inteligencia artificial directamente en tu negocio — para que seas más eficiente y manejes tu tiempo de una manera que finalmente tenga sentido.</p>
+        <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.95;" data-es="No es un curso. No es contenido grabado. Es trabajo real, contigo, durante 6 semanas." data-en="It is not a course. It is not recorded content. It is real work, with you, for 6 weeks.">No es un curso. No es contenido grabado. Es trabajo real, contigo, durante 6 semanas.</p>
+
+        <div style="margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ivory-deep);">
+          <div style="background:var(--ivory);padding:1.25rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">6</div>
+            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Semanas de acompañamiento" data-en="Weeks of support">Semanas de acompañamiento</div>
+          </div>
+          <div style="background:var(--ivory);padding:1.25rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">1 a 1</div>
+            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Directo contigo" data-en="Directly with you">Directo contigo</div>
+          </div>
+          <div style="background:var(--ivory);padding:1.25rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">IA</div>
+            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Integrada en tu negocio" data-en="Integrated in your business">Integrada en tu negocio</div>
+          </div>
+          <div style="background:var(--ivory);padding:1.25rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">0</div>
+            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Listas de tareas interminables" data-en="Endless task lists">Listas de tareas interminables</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--emerald-mid);margin-bottom:1.5rem;" data-es="Lo que trabajamos juntas" data-en="What we work on together">Lo que trabajamos juntas</div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div>
+            <div>
+              <div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Automatizaciones que trabajan por ti" data-en="Automations that work for you">Automatizaciones que trabajan por ti</div>
+              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Identificamos qué se puede automatizar y lo implementamos — para que tu negocio produzca incluso cuando no estás." data-en="We identify what can be automated and implement it — so your business produces even when you're not there.">Identificamos qué se puede automatizar y lo implementamos — para que tu negocio produzca incluso cuando no estás.</div>
+            </div>
+          </div>
+          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div>
+            <div>
+              <div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="IA integrada en tu operación" data-en="AI integrated in your operation">IA integrada en tu operación</div>
+              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="No teoría. Implementación directa de herramientas de inteligencia artificial en tu negocio real." data-en="Not theory. Direct implementation of AI tools in your real business.">No teoría. Implementación directa de herramientas de inteligencia artificial en tu negocio real.</div>
+            </div>
+          </div>
+          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div>
+            <div>
+              <div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Sistema de manejo de tiempo real" data-en="Real time management system">Sistema de manejo de tiempo real</div>
+              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Diseñamos un sistema que corre alrededor de tu vida — no al revés." data-en="We design a system that runs around your life — not the other way around.">Diseñamos un sistema que corre alrededor de tu vida — no al revés.</div>
+            </div>
+          </div>
+          <div style="padding:1.1rem 0;display:flex;gap:1rem;align-items:flex-start;">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div>
+            <div>
+              <div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Colaboraciones y tecnología" data-en="Collaborations and technology">Colaboraciones y tecnología</div>
+              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Identificamos oportunidades de colaboración y las herramientas tecnológicas que multiplican tu impacto sin multiplicar tu trabajo." data-en="We identify collaboration opportunities and the tech tools that multiply your impact without multiplying your work.">Identificamos oportunidades de colaboración y las herramientas tecnológicas que multiplican tu impacto sin multiplicar tu trabajo.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem;background:var(--wine-deep);padding:1.75rem;">
+          <div style="font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--champagne);margin-bottom:0.75rem;" data-es="Este programa es para ti si:" data-en="This program is for you if:">Este programa es para ti si:</div>
+          <div style="font-size:0.85rem;color:rgba(253,250,245,0.6);line-height:1.9;" data-es="Ya hiciste el Reset y tienes claridad — ahora quieres implementar. Tienes un negocio funcionando pero sientes que tú corres detrás de él. Estás lista para que la tecnología y la IA trabajen para ti." data-en="You already did the Reset and have clarity — now you want to implement. You have a working business but feel like you're chasing it. You're ready for technology and AI to work for you.">Ya hiciste el Reset y tienes claridad — ahora quieres implementar. Tienes un negocio funcionando pero sientes que tú corres detrás de él. Estás lista para que la tecnología y la IA trabajen para ti.</div>
+          <div style="margin-top:1.25rem;">
+            <a href="#booking"><button class="btn-champ" style="font-size:0.72rem;padding:0.85rem 1.75rem;width:100%;" data-es="Quiero saber más sobre Enfoque Dorado" data-en="I want to know more about Enfoque Dorado">Quiero saber más sobre Enfoque Dorado</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reset-experience" style="padding:0;">
+  <div class="re-inner">
+    <div class="re-left">
+      <div class="re-badge" data-es="Experiencia Premium · Lista de espera" data-en="Premium Experience · Waitlist">Experiencia Premium · Lista de espera</div>
+      <h2 class="re-title">The Reset<br/><em>Experience</em></h2>
+      <p class="re-hook" data-es="La claridad que llevas años intentando forzar... finalmente llega." data-en="The clarity you've been trying to force for years... finally clicks.">La claridad que llevas años intentando forzar... finalmente llega.</p>
+      <p class="re-body" data-es="4 días para resetear tu mente, tu energía y tu negocio. Sin ruido. Sin distracciones. Solo decisiones reales.<br/><br/><em>No es un retiro. No es coaching tradicional.</em> Es un reset completo." data-en="4 days to reset your mind, your energy, and your business. No noise. No distractions. Just real decisions.<br/><br/><em>Not a retreat. Not traditional coaching.</em> It is a complete reset.">4 días para resetear tu mente, tu energía y tu negocio. Sin ruido. Sin distracciones. Solo decisiones reales.<br/><br/><em>No es un retiro. No es coaching tradicional.</em> Es un reset completo.</p>
+      <div class="re-pillars">
+        <div class="re-pillar"><div class="re-pillar-dot"></div><div class="re-pillar-text" data-es="<strong>Mente.</strong> Claridad profunda en tus prioridades y tu dirección." data-en="<strong>Mind.</strong> Deep clarity on your priorities and your direction."><strong>Mente.</strong> Claridad profunda en tus prioridades y tu dirección.</div></div>
+        <div class="re-pillar"><div class="re-pillar-dot"></div><div class="re-pillar-text" data-es="<strong>Energía.</strong> Alineamos tu trabajo con tus ciclos naturales — no con disciplina forzada." data-en="<strong>Energy.</strong> We align your work with your natural cycles — not forced discipline."><strong>Energía.</strong> Alineamos tu trabajo con tus ciclos naturales — no con disciplina forzada.</div></div>
+        <div class="re-pillar"><div class="re-pillar-dot"></div><div class="re-pillar-text" data-es="<strong>Negocio.</strong> Un sistema que trabaja para ti cuando tú no puedes estar en todo." data-en="<strong>Business.</strong> A system that works for you when you can't be everywhere."><strong>Negocio.</strong> Un sistema que trabaja para ti cuando tú no puedes estar en todo.</div></div>
+      </div>
+    </div>
+    <div class="re-right">
+      <div id="re-form-container">
+        <div class="re-form-label" data-es="Acceso limitado · Lista de espera privada" data-en="Limited access · Private waitlist">Acceso limitado · Lista de espera privada</div>
+        <input type="text" class="re-input" id="re-name" data-placeholder-es="Tu nombre" data-placeholder-en="Your name" placeholder="Tu nombre"/>
+        <input type="email" class="re-input" id="re-email" data-placeholder-es="Tu correo electrónico" data-placeholder-en="Your email" placeholder="Tu correo electrónico"/>
+        <button class="re-cta" onclick="submitWaitlist()" data-es="Unirme a la lista de espera privada" data-en="Join the Private Waitlist">Unirme a la lista de espera privada</button>
+        <p class="re-note" data-es="No se comparte información. Los detalles se envían únicamente a la lista seleccionada." data-en="No information is shared. Details are sent only to the selected group.">No se comparte información. Los detalles se envían únicamente a la lista seleccionada.</p>
+      </div>
+      <div class="re-submitted" id="re-submitted">
+        <p data-es='"Estás en la lista. Te contactaré personalmente con los detalles." — Krizia' data-en='"You are on the list. I will contact you personally with the details." — Krizia'>"Estás en la lista. Te contactaré personalmente con los detalles." — Krizia</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contenido">
+  <div class="container">
+    <div class="eyebrow gold" data-es="Contenido & Recursos" data-en="Content & Resources">Contenido & Recursos</div>
+    <h2 class="section-title light" data-es="Todo lo que necesitas<br/><em>en un solo lugar.</em>" data-en="Everything you need<br/><em>in one place.</em>">Todo lo que necesitas<br/><em>en un solo lugar.</em></h2>
+    <div class="champ-rule"></div>
+    <div class="content-grid">
+      <div class="content-card">
+        <div class="content-card-eyebrow" data-es="Canal de YouTube" data-en="YouTube Channel">Canal de YouTube</div>
+        <h3>Krizia Ginslaine<br/>Focused Energy</h3>
+        <p data-es="Videos sobre productividad, manejo de energía e inteligencia artificial para tu negocio." data-en="Videos on productivity, energy management and AI for your business.">Videos sobre productividad, manejo de energía e inteligencia artificial para tu negocio.</p>
+        <a href="http://www.youtube.com/@kriziaginslainefocusedenergy?sub_confirmation=1" target="_blank"><button class="btn-champ" style="font-size:0.7rem;padding:0.8rem 1.8rem;" data-es="Ver canal" data-en="Watch channel">Ver canal</button></a>
+      </div>
+      <div class="content-card">
+        <div class="content-card-eyebrow">Podcast</div>
+        <h3>Del Desánimo<br/>a la Productividad</h3>
+        <p data-es="Episodios prácticos para empresarias que quieren recuperar su energía y claridad." data-en="Practical episodes for entrepreneurs who want to reclaim their energy and clarity.">Episodios prácticos para empresarias que quieren recuperar su energía y claridad.</p>
+        <a href="https://linktr.ee/kriziaginslaine" target="_blank"><button class="btn-champ" style="font-size:0.7rem;padding:0.8rem 1.8rem;" data-es="Escuchar" data-en="Listen">Escuchar</button></a>
+      </div>
+    </div>
+    <div style="font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--champagne);margin:2.5rem 0 1.25rem;" data-es="Artículos del Blog" data-en="Blog Articles">Artículos del Blog</div>
+    <div class="blog-grid">
+      <a href="https://14377.freshlearn.com/blog/2085" target="_blank" class="blog-card">
+        <div class="blog-part" data-es="Parte I" data-en="Part I">Parte I</div>
+        <div class="blog-title" data-es="Estrategias para aumentar la productividad en tu negocio" data-en="Strategies to boost productivity in your business">Estrategias para aumentar la productividad en tu negocio</div>
+        <div class="blog-desc" data-es="Las herramientas que necesitas para convertirte en líder empresarial y hacer crecer tu negocio." data-en="The tools you need to become a business leader and grow your business.">Las herramientas que necesitas para convertirte en líder empresarial y hacer crecer tu negocio.</div>
+        <div class="blog-link" data-es="Leer artículo →" data-en="Read article →">Leer artículo →</div>
+      </a>
+      <a href="https://14377.freshlearn.com/blog/2189" target="_blank" class="blog-card">
+        <div class="blog-part" data-es="Parte II" data-en="Part II">Parte II</div>
+        <div class="blog-title" data-es="Estrategias de Productividad Holística para Empresarios" data-en="Holistic Productivity Strategies for Entrepreneurs">Estrategias de Productividad Holística para Empresarios</div>
+        <div class="blog-desc" data-es="Cómo integrar bienestar, energía y sistemas para crecer sin sacrificar tu vida." data-en="How to integrate wellbeing, energy and systems to grow without sacrificing your life.">Cómo integrar bienestar, energía y sistemas para crecer sin sacrificar tu vida.</div>
+        <div class="blog-link" data-es="Leer artículo →" data-en="Read article →">Leer artículo →</div>
+      </a>
+      <a href="https://14377.freshlearn.com/blog/2205" target="_blank" class="blog-card">
+        <div class="blog-part" data-es="Parte III" data-en="Part III">Parte III</div>
+        <div class="blog-title" data-es="Técnicas para vencer la Procrastinación y reducir distracciones" data-en="Techniques to overcome Procrastination and reduce distractions">Técnicas para vencer la Procrastinación y reducir distracciones</div>
+        <div class="blog-desc" data-es="El crecimiento empresarial incluye dominar tu mente. Aprende a ejecutar sin que nada te detenga." data-en="Business growth includes mastering your mind. Learn to execute without anything stopping you.">El crecimiento empresarial incluye dominar tu mente. Aprende a ejecutar sin que nada te detenga.</div>
+        <div class="blog-link" data-es="Leer artículo →" data-en="Read article →">Leer artículo →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="shops">
+  <div class="container">
+    <div class="eyebrow" data-es="Mis otros negocios" data-en="My Other Businesses">Mis otros negocios</div>
+    <h2 class="section-title" data-es="Construyo cosas.<br/><em>Estos son dos de ellos.</em>" data-en="I build things.<br/><em>These are two of them.</em>">Construyo cosas.<br/><em>Estos son dos de ellos.</em></h2>
+    <div class="champ-rule"></div>
+    <div class="shops-grid">
+      <div class="shop-card">
+        <div class="shop-eyebrow" data-es="Joyería · Etsy · Puerto Rico" data-en="Jewelry · Etsy · Puerto Rico">Joyería · Etsy · Puerto Rico</div>
+        <h3>Nova Arcana</h3>
+        <p data-es="Joyería en acero inoxidable hecha para durar. Diseñada para mujeres que conocen su valor y lo llevan sin disculpas." data-en="Stainless steel jewelry built to last. Designed for women who know their worth and wear it without apology.">Joyería en acero inoxidable hecha para durar. Diseñada para mujeres que conocen su valor y lo llevan sin disculpas.</p>
+        <a href="https://www.etsy.com/shop/NOVAARCANA" target="_blank"><button class="btn-wine" data-es="Comprar en Etsy" data-en="Shop on Etsy">Comprar en Etsy</button></a>
+      </div>
+      <div class="shop-card">
+        <div class="shop-eyebrow" data-es="Fragancias · Scentsy" data-en="Fragrance · Scentsy">Fragancias · Scentsy</div>
+        <h3>Krizia Scentsy</h3>
+        <p data-es="Tu ambiente afecta tu energía más de lo que crees. Uso Scentsy para crear el tono de mis mejores días de trabajo. Tu espacio también debe trabajar para ti." data-en="Your environment shapes your energy more than you think. I use Scentsy to set the tone for my best work days. Your space should work for you too.">Tu ambiente afecta tu energía más de lo que crees. Uso Scentsy para crear el tono de mis mejores días de trabajo. Tu espacio también debe trabajar para ti.</p>
+        <a href="https://krizia.scentsy.us" target="_blank"><button class="btn-wine" data-es="Visitar mi tienda" data-en="Visit My Store">Visitar mi tienda</button></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="final-cta">
+  <div class="container">
+    <div class="cta-eyebrow" data-es="La decisión" data-en="The Decision">La decisión</div>
+    <h2 data-es="Deja de pensar.<br/><em>Empieza a moverte.</em>" data-en="Stop thinking.<br/><em>Start moving.</em>">Deja de pensar.<br/><em>Empieza a moverte.</em></h2>
+    <p data-es="Una sesión. Una decisión. O te quedas donde estás o no." data-en="One session. One decision. You either stay where you are or you don't.">Una sesión. Una decisión. O te quedas donde estás o no.</p>
+    <a href="#booking"><button class="btn-champ" style="font-size:0.82rem;padding:1.2rem 3.5rem;letter-spacing:2.5px;position:relative;z-index:1;" data-es="Reserva tu sesión ahora" data-en="Book Your Session Now">Reserva tu sesión ahora</button></a>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="container">
+    <div class="eyebrow" data-es="Reserva tu sesión" data-en="Book Your Session">Reserva tu sesión</div>
+    <h2 class="section-title" data-es="Ya sabes que<br/><em>necesitas esto.</em>" data-en="You already know<br/><em>you need this.</em>">Ya sabes que<br/><em>necesitas esto.</em></h2>
+    <div class="champ-rule"></div>
+    <div class="booking-grid">
+      <div class="booking-left">
+        <div class="booking-pullquote" data-es='"Completa esto. Te confirmo en 24 horas y te envío el link de pago y el Zoom."' data-en='"Fill this out. I confirm within 24 hours and send you the payment link and Zoom."'>"Completa esto. Te confirmo en 24 horas y te envío el link de pago y el Zoom."</div>
+        <p data-es="Sesión de trabajo de 60 minutos vía Zoom. Llega con tu problema real y nos ponemos a trabajar de inmediato." data-en="60-minute working session via Zoom. Come with your real problem and we get to work immediately.">Sesión de trabajo de 60 minutos vía Zoom. Llega con tu problema real y nos ponemos a trabajar de inmediato.</p>
+        <div class="booking-process">
+          <div class="booking-process-title" data-es="Qué pasa después de enviar:" data-en="What happens after you submit:">Qué pasa después de enviar:</div>
+          <div class="booking-process-step"><span class="booking-step-n">1</span><span data-es="Krizia revisa tu mensaje y te confirma en 24h" data-en="Krizia reviews your message and confirms within 24h">Krizia revisa tu mensaje y te confirma en 24h</span></div>
+          <div class="booking-process-step"><span class="booking-step-n">2</span><span data-es="Recibes el link de pago ($147)" data-en="You receive the payment link ($147)">Recibes el link de pago ($147)</span></div>
+          <div class="booking-process-step"><span class="booking-step-n">3</span><span data-es="Coordinamos fecha y hora vía Zoom" data-en="We coordinate date and time via Zoom">Coordinamos fecha y hora vía Zoom</span></div>
+          <div class="booking-process-step"><span class="booking-step-n">4</span><span data-es="Nos conectamos y trabajamos" data-en="We connect and get to work">Nos conectamos y trabajamos</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label data-es="Tu nombre" data-en="Your Name">Tu nombre</label>
+          <input type="text" id="b-name" placeholder="Nombre y apellido" data-placeholder-es="Nombre y apellido" data-placeholder-en="First and Last Name"/>
+        </div>
+        <div class="form-group">
+          <label data-es="Correo electrónico" data-en="Email Address">Correo electrónico</label>
+          <input type="email" id="b-email" placeholder="tu@correo.com" data-placeholder-es="tu@correo.com" data-placeholder-en="you@email.com"/>
+        </div>
+        <div class="form-group">
+          <label data-es="¿Qué está pasando ahora mismo? Sé específica." data-en="What's going on right now? Be specific.">¿Qué está pasando ahora mismo? Sé específica.</label>
+          <textarea id="b-msg" placeholder="¿En qué estás atascada? ¿Qué has intentado? ¿Cómo se ve avanzar para ti?" data-placeholder-es="¿En qué estás atascada? ¿Qué has intentado? ¿Cómo se ve avanzar para ti?" data-placeholder-en="What are you stuck on? What have you tried? What does moving forward look like for you?"></textarea>
+        </div>
+        <button class="btn-champ" style="width:100%;padding:1.15rem;font-size:0.78rem;letter-spacing:2px;cursor:pointer;border:none;" onclick="submitBooking()" data-es="Solicitar mi Reset Session" data-en="Request My Reset Session">Solicitar mi Reset Session</button>
+        <div class="submit-msg" id="submitMsg" data-es="Tu solicitud está enviada. Te confirmo en menos de 24 horas." data-en="Your request is in. I'll confirm within 24 hours.">Tu solicitud está enviada. Te confirmo en menos de 24 horas.</div>
+        <p class="booking-note" data-es="Sin formularios largos. Sin tarea previa. Solo preséntate lista para avanzar. · Reset Session · $147 · 60 min · Zoom" data-en="No long forms. No prep homework. Just show up ready to move forward. · Reset Session · $147 · 60 min · Zoom">Sin formularios largos. Sin tarea previa. Solo preséntate lista para avanzar. · Reset Session · $147 · 60 min · Zoom</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">KRIZIA GINSLAINE</div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/kriziaginslaine" target="_blank">Instagram</a>
+    <a href="http://www.youtube.com/@kriziaginslainefocusedenergy" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@kriziaginslaine" target="_blank">TikTok</a>
+    <a href="https://www.linkedin.com/in/krizia-ginslaine-olivero-68221671/" target="_blank">LinkedIn</a>
+    <a href="https://www.etsy.com/shop/NOVAARCANA" target="_blank">Nova Arcana</a>
+    <a href="https://krizia.scentsy.us" target="_blank">Scentsy</a>
+  </div>
+  <div class="footer-copy">© 2025 <span class="footer-champ">Krizia Ginslaine</span> · Puerto Rico</div>
+</footer>
+
+<script>
+let lang='es';
+const T={
+  'focus-input':{es:'¿En qué estás atascada ahora mismo?',en:"What are you stuck on right now?"},
+  'gpt-intro':{es:'Cuéntame qué estás enfrentando ahora mismo. Tu tarea, tu bloqueo, tu nivel de energía. Te doy algo que puedes hacer de inmediato.',en:"Tell me what you're dealing with right now. Your task, your block, your energy. I'll give you something you can act on immediately."},
+  'typingIndicator':{es:'Pensando...',en:'Thinking...'}
+};
+
+function toggleLang(){
+  lang=lang==='es'?'en':'es';
+  document.querySelector('.lang-toggle').textContent=lang==='es'?'English':'Español';
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-es]').forEach(el=>{
+    const v=el.getAttribute('data-'+lang);
+    if(v) el.innerHTML=v;
+  });
+  document.querySelectorAll('[data-placeholder-'+lang+']').forEach(el=>{
+    el.placeholder=el.getAttribute('data-placeholder-'+lang);
+  });
+  const fi=document.getElementById('focus-input');
+  if(fi&&!fi.disabled) fi.placeholder=T['focus-input'][lang];
+  document.getElementById('gpt-intro').textContent=T['gpt-intro'][lang];
+  const ql=document.getElementById('questions-left');
+  const rem=3-questionsUsed;
+  ql.textContent=lang==='es'?`${rem} de 3 preguntas disponibles`:`${rem} of 3 questions remaining`;
+}
+
+function openTestimonial(){document.getElementById('tEdit').classList.add('open');}
+function closeTestimonial(){document.getElementById('tEdit').classList.remove('open');}
+function saveTestimonial(){
+  const t=document.getElementById('tText').value.trim();
+  const a=document.getElementById('tAuthor').value.trim();
+  if(t) document.getElementById('testimonialText').textContent='"'+t+'"';
+  if(a) document.getElementById('testimonialAuthor').innerHTML='— <span>'+a+'</span>';
+  closeTestimonial();
+}
+
+function submitWaitlist(){
+  const n=document.getElementById('re-name').value.trim();
+  const e=document.getElementById('re-email').value.trim();
+  if(!n||!e){alert(lang==='es'?'Por favor ingresa tu nombre y correo.':'Please enter your name and email.');return;}
+  document.getElementById('re-form-container').style.display='none';
+  const sub=document.getElementById('re-submitted');
+  sub.style.display='block';
+  const p=sub.querySelector('p');
+  p.textContent=lang==='es'?'"Estás en la lista. Te contactaré personalmente con los detalles." — Krizia':'"You are on the list. I will contact you personally with the details." — Krizia';
+}
+
+const SYS=`You are a custom GPT built on Krizia Ginslaine's coaching method. Krizia is a life and business coach from Puerto Rico, engineer with 14+ years of experience, who became a mother at 17 and built her career while raising a family. She specializes in energy management, productivity, AI tools, and helping Latina entrepreneurs stop doing everything and start executing what matters.
+
+LANGUAGE RULE: Respond in the same language as the user's message.
+
+STRICT RULES:
+- If asked about your nature, role, or how you work: respond only with the equivalent of "I'm here to help you focus. What are you working on?" in the user's language.
+- Never identify as AI, GPT, or Claude.
+- Only answer questions about focus, productivity, energy, business, and AI tools.
+
+YOUR JOB:
+- Be direct and warm. No fluff.
+- Short paragraphs. Get to the point.
+- End with one clear action they can take RIGHT NOW.
+- Keep responses under 180 words.
+- Occasionally mention a Reset Session with Krizia ($147, 60 min) goes deeper.
+- Never use generic empowerment phrases.`;
+
+let chatHistory=[],questionsUsed=0;
+const MAX_Q=3;
+
+async function sendFocusMessage(){
+  if(questionsUsed>=MAX_Q) return;
+  const input=document.getElementById('focus-input');
+  const btn=document.getElementById('focus-btn');
+  const msg=input.value.trim();
+  if(!msg) return;
+  appendMsg('user',msg);
+  input.value='';
+  btn.disabled=true;
+  const ti=document.getElementById('typingIndicator');
+  ti.textContent=T['typingIndicator'][lang];
+  ti.style.display='block';
+  chatHistory.push({role:'user',content:msg});
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYS,messages:chatHistory})
+    });
+    const data=await res.json();
+    const reply=data.content?.map(b=>b.text||'').join('')||'Intenta de nuevo.';
+    chatHistory.push({role:'assistant',content:reply});
+    questionsUsed++;
+    const left=MAX_Q-questionsUsed;
+    const ql=document.getElementById('questions-left');
+    const done=lang==='es'
+      ?'<br/><br/><em style="font-size:0.78rem;color:rgba(253,250,245,0.25);">Usaste las 3 preguntas. Reserva tu Reset Session para ir más profundo.</em>'
+      :'<br/><br/><em style="font-size:0.78rem;color:rgba(253,250,245,0.25);">You used all 3 questions. Book your Reset Session to go deeper.</em>';
+    if(left<=0){
+      appendMsg('ai',reply+done);
+      input.disabled=true;btn.disabled=true;
+      input.placeholder=lang==='es'?'Vista previa completada':'Preview complete';
+      ql.textContent=lang==='es'?'0 de 3 preguntas disponibles':'0 of 3 questions remaining';
+    } else {
+      appendMsg('ai',reply);
+      ql.textContent=lang==='es'?`${left} de 3 preguntas disponibles`:`${left} of 3 questions remaining`;
+      btn.disabled=false;
+    }
+  }catch(e){
+    appendMsg('ai',lang==='es'?'Error de conexión. Intenta de nuevo.':'Connection error. Try again.');
+    btn.disabled=false;
+  }
+  ti.style.display='none';
+}
+
+function appendMsg(role,text){
+  const box=document.getElementById('chatBox');
+  const w=document.createElement('div');
+  w.style.marginBottom='1.25rem';
+  if(role==='ai'){
+    w.innerHTML=`<span class="msg-ai-label">Krizia GPT</span><div class="msg-ai">${text.replace(/\n/g,'<br/>')}</div>`;
+  } else {
+    w.style.textAlign='right';
+    w.innerHTML=`<span class="msg-user-label">${lang==='es'?'Tú':'You'}</span><div class="msg-user">${text}</div>`;
+  }
+  box.appendChild(w);
+  box.scrollTop=box.scrollHeight;
+}
+
+document.getElementById('focus-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendFocusMessage();});
+
+function submitBooking(){
+  const n=document.getElementById('b-name').value.trim();
+  const e=document.getElementById('b-email').value.trim();
+  if(!n||!e){alert(lang==='es'?'Por favor ingresa tu nombre y correo.':'Please enter your name and email.');return;}
+  const m=document.getElementById('submitMsg');
+  m.textContent=m.getAttribute('data-'+lang);
+  m.style.display='block';
+}
+
+function loadHeroPhoto(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const img=document.getElementById('heroImg');
+    const box=document.getElementById('heroPhotoBox');
+    img.src=ev.target.result;img.style.display='block';
+    box.querySelector('svg').style.display='none';
+    box.querySelector('.upload-hint').style.display='none';
+    box.querySelector('.upload-icon').style.display='none';
+  };
+  r.readAsDataURL(f);
+}
+
+function loadAboutPhoto(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const img=document.getElementById('aboutImg');
+    const box=document.getElementById('aboutPhotoBox');
+    img.src=ev.target.result;img.style.display='block';
+    box.querySelector('svg').style.display='none';
+    box.querySelector('.about-photo-hint').style.display='none';
+  };
+  r.readAsDataURL(f);
+}
+</script>
+</body>
+</html>
