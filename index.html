@@ -44,11 +44,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 .btn-ghost:hover{border-color:var(--champagne);color:var(--champagne);}
 .hero-right{position:relative;background:var(--wine-mid);display:flex;align-items:stretch;overflow:hidden;}
 .hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 30%,rgba(200,169,110,0.1) 0%,transparent 65%);z-index:1;}
-.hero-photo-frame{width:100%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;position:relative;z-index:2;min-height:580px;}
-.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;display:none;position:absolute;inset:0;}
-.upload-hint{color:rgba(253,250,245,0.3);font-size:0.73rem;letter-spacing:1px;text-align:center;font-family:'Inter',sans-serif;}
-.upload-icon{width:50px;height:50px;border:1px solid rgba(253,250,245,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.5rem;}
-#photoInput{display:none;}
+.hero-photo-frame{width:100%;position:relative;z-index:2;min-height:580px;overflow:hidden;}
+.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0;}
 
 .truth-strip{background:var(--champagne);padding:1.1rem 2rem;display:flex;justify-content:center;align-items:center;gap:2.5rem;flex-wrap:wrap;}
 .truth-item{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--wine-deep);font-style:italic;display:flex;align-items:center;gap:1.5rem;}
@@ -92,11 +89,9 @@ section{padding:6rem 5rem;}
 #about{background:var(--cream);}
 .about-grid{display:grid;grid-template-columns:380px 1fr;gap:5rem;align-items:start;margin-top:3.5rem;}
 .about-photo-wrap{position:relative;}
-.about-photo{width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--ivory-deep);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;border:1px solid var(--ivory-deep);}
-.about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:none;}
-.about-photo-hint{font-size:0.73rem;color:var(--text-light);text-align:center;padding:0 1rem;}
+.about-photo{width:100%;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--ivory-deep);}
+.about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 .about-accent{position:absolute;bottom:-16px;right:-16px;width:55%;height:55%;border:1.5px solid var(--champ-light);z-index:-1;}
-.pullquote{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--wine);border-left:2px solid var(--champagne);padding-left:1.5rem;margin:2rem 0;line-height:1.5;}
 .about-text p{font-size:0.93rem;color:var(--text-muted);line-height:1.95;margin-bottom:1rem;}
 .about-text p strong{color:var(--text-body);}
 .story-moment{background:var(--wine-pale);border-left:3px solid var(--wine);padding:1.5rem 1.75rem;margin:1.75rem 0;}
@@ -106,7 +101,6 @@ section{padding:6rem 5rem;}
 .exp-card{background:var(--ivory);padding:1.25rem 1rem;text-align:center;}
 .exp-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--wine);line-height:1;}
 .exp-label{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.35rem;}
-#photoInput2{display:none;}
 
 #what-happens{background:var(--wine-deep);padding:6rem 5rem;}
 .steps-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:3.5rem;border:1px solid rgba(200,169,110,0.15);}
@@ -170,7 +164,6 @@ section{padding:6rem 5rem;}
 .btn-champ-full:hover{opacity:0.88;}
 .price-guarantee{font-size:0.75rem;color:rgba(253,250,245,0.25);text-align:center;margin-top:1rem;line-height:1.6;}
 
-/* RESET EXPERIENCE — Premium Section */
 #reset-experience{background:var(--wine-deep);padding:0;}
 .re-inner{display:grid;grid-template-columns:1fr 1fr;min-height:520px;}
 .re-left{padding:6rem 4rem 6rem 5rem;display:flex;flex-direction:column;justify-content:center;position:relative;}
@@ -252,7 +245,6 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
 .footer-links a{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(253,250,245,0.28);transition:color 0.2s;}
 .footer-links a:hover{color:var(--champagne);}
 .footer-copy{font-size:0.7rem;color:rgba(253,250,245,0.2);}
-.footer-champ{color:var(--champagne);}
 
 .t-edit{display:none;position:fixed;inset:0;background:rgba(61,15,30,0.85);z-index:500;align-items:center;justify-content:center;}
 .t-edit.open{display:flex;}
@@ -317,15 +309,14 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
     <h1 data-es="Claridad.<br/>Enfoque.<br/><em>Movimiento.</em>" data-en="Clarity.<br/>Focus.<br/><em>Forward.</em>">Claridad.<br/>Enfoque.<br/><em>Movimiento.</em></h1>
     <p class="hero-sub" data-es="En una sesión de 60 minutos, identificamos tu bloqueo real, cortamos el ruido y construimos el plan que ejecutas hoy." data-en="In one 60-minute session, we identify your real block, cut the noise, and build the plan you execute today.">En una sesión de 60 minutos, identificamos tu bloqueo real, cortamos el ruido y construimos el plan que ejecutas hoy.</p>
     <div class="hero-actions">
-    <a href="https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session" target="_blank"><button class="btn-champ" data-es="Reserva tu Reset Session — $147" data-en="Book Your Reset Session — $147">Reserva tu Reset Session — $147</button></a>
+      <a href="https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session" target="_blank"><button class="btn-champ" data-es="Reserva tu Reset Session — $147" data-en="Book Your Reset Session — $147">Reserva tu Reset Session — $147</button></a>
       <a href="#reset-experience"><button class="btn-ghost" data-es="The Reset Experience — Lista de espera" data-en="The Reset Experience — Join Waitlist">The Reset Experience — Lista de espera</button></a>
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-photo-frame" id="heroPhotoBox">
-      <img id="heroImg" src="foto-hero.png" alt="Krizia Ginslaine" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0;"/>
+    <div class="hero-photo-frame">
+      <img src="foto-hero.png" alt="Krizia Ginslaine"/>
     </div>
-
   </div>
 </section>
 
@@ -381,13 +372,10 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
   <div class="container">
     <div class="about-grid">
       <div class="about-photo-wrap">
-        <div class="about-photo" id="aboutPhotoBox" onclick="document.getElementById('photoInput2').click()">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(122,85,101,0.3)" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          <div class="about-photo-hint" data-es="Haz clic para subir tu foto" data-en="Click to upload your photo">Haz clic para subir tu foto</div>
-          <img id="aboutImg" src="" alt="Krizia Ginslaine"/>
+        <div class="about-photo">
+          <img src="foto-about.png" alt="Krizia Ginslaine"/>
         </div>
         <div class="about-accent"></div>
-        <input type="file" id="photoInput2" accept="image/*" onchange="loadAboutPhoto(event)"/>
         <div class="experience-grid">
           <div class="exp-card"><div class="exp-num">14+</div><div class="exp-label" data-es="Años de experiencia" data-en="Years experience">Años de experiencia</div></div>
           <div class="exp-card"><div class="exp-num">150+</div><div class="exp-label" data-es="Personas lideradas" data-en="People led">Personas lideradas</div></div>
@@ -404,8 +392,8 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
         <p data-es="Ese camino me llevó a la ingeniería, donde descubrí que me apasiona mejorar procesos y crear sistemas que funcionan. Lideré equipos de más de <strong>150 personas</strong> en entornos de alta presión, gestioné operaciones completas y aprendí desde adentro cómo se construye un negocio que no depende de que estés en todo." data-en="That journey led me to engineering, where I discovered my passion for improving processes and creating systems that work. I led teams of over <strong>150 people</strong> in high-pressure environments, managed full operations, and learned from the inside how you build a business that doesn't depend on you being everywhere.">Ese camino me llevó a la ingeniería, donde descubrí que me apasiona mejorar procesos y crear sistemas que funcionan. Lideré equipos de más de <strong>150 personas</strong> en entornos de alta presión, gestioné operaciones completas y aprendí desde adentro cómo se construye un negocio que no depende de que estés en todo.</p>
         <p data-es="Después de <strong>14 años</strong>, entendí algo que nadie te dice: el problema no es que no estés haciendo suficiente. Es que estás operando sin un sistema alineado a tu energía." data-en="After <strong>14 years</strong>, I understood something nobody tells you: the problem is not that you are not doing enough. It is that you are operating without a system aligned to your energy.">Después de <strong>14 años</strong>, entendí algo que nadie te dice: el problema no es que no estés haciendo suficiente. Es que estás operando sin un sistema alineado a tu energía.</p>
         <p data-es="Hoy combino estrategia de negocio, manejo de energía e inteligencia artificial para ayudarte a generar más sin perderte en el proceso." data-en="Today I combine business strategy, energy management, and artificial intelligence to help you generate more without losing yourself in the process.">Hoy combino estrategia de negocio, manejo de energía e inteligencia artificial para ayudarte a generar más sin perderte en el proceso.</p>
-        <p data-es="No necesitas hacer más. Necesitas claridad. Necesitas dirección. Necesitas moverte." data-en="You don't need to do more. You need clarity. You need direction. You need to move." style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--wine);font-style:italic;line-height:1.6;">No necesitas hacer más. Necesitas claridad. Necesitas dirección. Necesitas moverte.</p>
-        <a href="https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session" target="_blank"><button class="btn-champ" data-es="Reserva tu sesión" data-en="Book Your Session">Reserva tu sesión</button></a>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--wine);font-style:italic;line-height:1.6;" data-es="No necesitas hacer más. Necesitas claridad. Necesitas dirección. Necesitas moverte." data-en="You don't need to do more. You need clarity. You need direction. You need to move.">No necesitas hacer más. Necesitas claridad. Necesitas dirección. Necesitas moverte.</p>
+        <a href="https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session" target="_blank" style="display:inline-block;margin-top:1.5rem;"><button class="btn-champ" data-es="Reserva tu sesión" data-en="Book Your Session">Reserva tu sesión</button></a>
       </div>
     </div>
   </div>
@@ -420,7 +408,7 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
       <div class="step-card"><div class="step-num">01</div><div class="step-label" data-es="El bloqueo real" data-en="The real block">El bloqueo real</div><div class="step-body" data-es="No el superficial. El que lleva meses deteniéndote sin que lo hayas nombrado todavía." data-en="Not the surface one. The one that has been stopping you for months without you naming it yet.">No el superficial. El que lleva meses deteniéndote sin que lo hayas nombrado todavía.</div></div>
       <div class="step-card"><div class="step-num">02</div><div class="step-label" data-es="Cortar el ruido" data-en="Cut the noise">Cortar el ruido</div><div class="step-body" data-es="Todo lo que no te mueve hacia adelante se elimina. Creamos espacio para lo que realmente importa." data-en="Everything not moving you forward gets cut. We create space for what actually matters.">Todo lo que no te mueve hacia adelante se elimina. Creamos espacio para lo que realmente importa.</div></div>
       <div class="step-card"><div class="step-num">03</div><div class="step-label" data-es="Claridad de prioridades" data-en="Clarity on priorities">Claridad de prioridades</div><div class="step-body" data-es="Sales sabiendo qué importa y en qué orden exacto. Sin más adivinar por dónde empezar." data-en="You leave knowing what matters and in what exact order. No more guessing where to start.">Sales sabiendo qué importa y en qué orden exacto. Sin más adivinar por dónde empezar.</div></div>
-      <div class="step-card"><div class="step-num">04</div><div class="step-label" data-es="Tu plan de ejecución" data-en="Your execution plan">Tu plan de ejecución</div><div class="step-body" data-es="Simple. Directo. Construido para tu energía y tu realidad — no para una versión idealizada de ti." data-en="Simple. Direct. Built for your energy and your reality — not for an idealized version of you.">Simple. Directo. Construido para tu energía y tu realidad — no para una versión idealizada de ti.</div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-label" data-es="Tu plan de ejecución" data-en="Your execution plan">Tu plan de ejecución</div><div class="step-body" data-es="Simple. Directo. Construido para tu energía y tu realidad." data-en="Simple. Direct. Built for your energy and your reality.">Simple. Directo. Construido para tu energía y tu realidad.</div></div>
       <div class="step-card"><div class="step-num">05</div><div class="step-label" data-es="Acción hoy" data-en="Action today">Acción hoy</div><div class="step-body" data-es="Sales con pasos claros que ejecutas hoy. No algún día. Hoy." data-en="You leave with clear steps to execute today. Not someday. Today.">Sales con pasos claros que ejecutas hoy. No algún día. Hoy.</div></div>
     </div>
   </div>
@@ -499,75 +487,31 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
   </div>
 </section>
 
-<!-- THE RESET EXPERIENCE -->
-<!-- ENFOQUE DORADO -->
 <section id="enfoque-dorado" style="background:var(--ivory);padding:6rem 5rem;">
   <div class="container">
     <div class="eyebrow" data-es="El siguiente paso" data-en="The next step">El siguiente paso</div>
     <h2 class="section-title" data-es="El Reset te dio claridad.<br/><em>El Enfoque Dorado es donde lo construimos.</em>" data-en="The Reset gave you clarity.<br/><em>Enfoque Dorado is where we build it.</em>">El Reset te dio claridad.<br/><em>El Enfoque Dorado es donde lo construimos.</em></h2>
     <div class="champ-rule"></div>
-
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:1rem;">
       <div>
-        <p style="font-size:1.05rem;color:var(--text-body);line-height:1.95;margin-bottom:1.5rem;font-family:'Cormorant Garamond',serif;font-style:italic;">
-          "Aquí aplicamos el sistema que corre alrededor de tu vida. Recuperamos el control de tu negocio. Le dices adiós a las listas de tareas interminables."
-        </p>
+        <p style="font-size:1.05rem;color:var(--text-body);line-height:1.95;margin-bottom:1.5rem;font-family:'Cormorant Garamond',serif;font-style:italic;">"Aquí aplicamos el sistema que corre alrededor de tu vida. Recuperamos el control de tu negocio. Le dices adiós a las listas de tareas interminables."</p>
         <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.95;margin-bottom:1rem;" data-es="Implementamos automatizaciones, tecnología, colaboraciones e inteligencia artificial directamente en tu negocio — para que seas más eficiente y manejes tu tiempo de una manera que finalmente tenga sentido." data-en="We implement automations, technology, collaborations and artificial intelligence directly into your business — so you operate more efficiently and manage your time in a way that finally makes sense.">Implementamos automatizaciones, tecnología, colaboraciones e inteligencia artificial directamente en tu negocio — para que seas más eficiente y manejes tu tiempo de una manera que finalmente tenga sentido.</p>
         <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.95;" data-es="No es un curso. No es contenido grabado. Es trabajo real, contigo, durante 6 semanas." data-en="It is not a course. It is not recorded content. It is real work, with you, for 6 weeks.">No es un curso. No es contenido grabado. Es trabajo real, contigo, durante 6 semanas.</p>
-
         <div style="margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ivory-deep);">
-          <div style="background:var(--ivory);padding:1.25rem;">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">6</div>
-            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Semanas de acompañamiento" data-en="Weeks of support">Semanas de acompañamiento</div>
-          </div>
-          <div style="background:var(--ivory);padding:1.25rem;">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">1 a 1</div>
-            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Directo contigo" data-en="Directly with you">Directo contigo</div>
-          </div>
-          <div style="background:var(--ivory);padding:1.25rem;">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">IA</div>
-            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Integrada en tu negocio" data-en="Integrated in your business">Integrada en tu negocio</div>
-          </div>
-          <div style="background:var(--ivory);padding:1.25rem;">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">0</div>
-            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Listas de tareas interminables" data-en="Endless task lists">Listas de tareas interminables</div>
-          </div>
+          <div style="background:var(--ivory);padding:1.25rem;"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">6</div><div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Semanas de acompañamiento" data-en="Weeks of support">Semanas de acompañamiento</div></div>
+          <div style="background:var(--ivory);padding:1.25rem;"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">1 a 1</div><div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Directo contigo" data-en="Directly with you">Directo contigo</div></div>
+          <div style="background:var(--ivory);padding:1.25rem;"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">IA</div><div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Integrada en tu negocio" data-en="Integrated in your business">Integrada en tu negocio</div></div>
+          <div style="background:var(--ivory);padding:1.25rem;"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--wine);line-height:1;">0</div><div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem;" data-es="Listas de tareas interminables" data-en="Endless task lists">Listas de tareas interminables</div></div>
         </div>
       </div>
-
       <div>
         <div style="font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--emerald-mid);margin-bottom:1.5rem;" data-es="Lo que trabajamos juntas" data-en="What we work on together">Lo que trabajamos juntas</div>
         <div style="display:flex;flex-direction:column;gap:0;">
-          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div>
-            <div>
-              <div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Automatizaciones que trabajan por ti" data-en="Automations that work for you">Automatizaciones que trabajan por ti</div>
-              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Identificamos qué se puede automatizar y lo implementamos — para que tu negocio produzca incluso cuando no estás." data-en="We identify what can be automated and implement it — so your business produces even when you're not there.">Identificamos qué se puede automatizar y lo implementamos — para que tu negocio produzca incluso cuando no estás.</div>
-            </div>
-          </div>
-          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div>
-            <div>
-              <div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="IA integrada en tu operación" data-en="AI integrated in your operation">IA integrada en tu operación</div>
-              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="No teoría. Implementación directa de herramientas de inteligencia artificial en tu negocio real." data-en="Not theory. Direct implementation of AI tools in your real business.">No teoría. Implementación directa de herramientas de inteligencia artificial en tu negocio real.</div>
-            </div>
-          </div>
-          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div>
-            <div>
-              <div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Sistema de manejo de tiempo real" data-en="Real time management system">Sistema de manejo de tiempo real</div>
-              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Diseñamos un sistema que corre alrededor de tu vida — no al revés." data-en="We design a system that runs around your life — not the other way around.">Diseñamos un sistema que corre alrededor de tu vida — no al revés.</div>
-            </div>
-          </div>
-          <div style="padding:1.1rem 0;display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div>
-            <div>
-              <div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Colaboraciones y tecnología" data-en="Collaborations and technology">Colaboraciones y tecnología</div>
-              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Identificamos oportunidades de colaboración y las herramientas tecnológicas que multiplican tu impacto sin multiplicar tu trabajo." data-en="We identify collaboration opportunities and the tech tools that multiply your impact without multiplying your work.">Identificamos oportunidades de colaboración y las herramientas tecnológicas que multiplican tu impacto sin multiplicar tu trabajo.</div>
-            </div>
-          </div>
+          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div><div><div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Automatizaciones que trabajan por ti" data-en="Automations that work for you">Automatizaciones que trabajan por ti</div><div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Identificamos qué se puede automatizar y lo implementamos — para que tu negocio produzca incluso cuando no estás." data-en="We identify what can be automated and implement it — so your business produces even when you're not there.">Identificamos qué se puede automatizar y lo implementamos — para que tu negocio produzca incluso cuando no estás.</div></div></div>
+          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div><div><div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="IA integrada en tu operación" data-en="AI integrated in your operation">IA integrada en tu operación</div><div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="No teoría. Implementación directa de herramientas de inteligencia artificial en tu negocio real." data-en="Not theory. Direct implementation of AI tools in your real business.">No teoría. Implementación directa de herramientas de inteligencia artificial en tu negocio real.</div></div></div>
+          <div style="padding:1.1rem 0;border-bottom:1px solid var(--ivory-deep);display:flex;gap:1rem;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div><div><div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Sistema de manejo de tiempo real" data-en="Real time management system">Sistema de manejo de tiempo real</div><div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Diseñamos un sistema que corre alrededor de tu vida — no al revés." data-en="We design a system that runs around your life — not the other way around.">Diseñamos un sistema que corre alrededor de tu vida — no al revés.</div></div></div>
+          <div style="padding:1.1rem 0;display:flex;gap:1rem;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:var(--emerald-mid);flex-shrink:0;margin-top:0.55rem;"></div><div><div style="font-size:0.88rem;font-weight:500;color:var(--text-body);margin-bottom:0.2rem;" data-es="Colaboraciones y tecnología" data-en="Collaborations and technology">Colaboraciones y tecnología</div><div style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;" data-es="Identificamos oportunidades de colaboración y las herramientas tecnológicas que multiplican tu impacto sin multiplicar tu trabajo." data-en="We identify collaboration opportunities and the tech tools that multiply your impact without multiplying your work.">Identificamos oportunidades de colaboración y las herramientas tecnológicas que multiplican tu impacto sin multiplicar tu trabajo.</div></div></div>
         </div>
-
         <div style="margin-top:2rem;background:var(--wine-deep);padding:1.75rem;">
           <div style="font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--champagne);margin-bottom:0.75rem;" data-es="Este programa es para ti si:" data-en="This program is for you if:">Este programa es para ti si:</div>
           <div style="font-size:0.85rem;color:rgba(253,250,245,0.6);line-height:1.9;" data-es="Ya hiciste el Reset y tienes claridad — ahora quieres implementar. Tienes un negocio funcionando pero sientes que tú corres detrás de él. Estás lista para que la tecnología y la IA trabajen para ti." data-en="You already did the Reset and have clarity — now you want to implement. You have a working business but feel like you're chasing it. You're ready for technology and AI to work for you.">Ya hiciste el Reset y tienes claridad — ahora quieres implementar. Tienes un negocio funcionando pero sientes que tú corres detrás de él. Estás lista para que la tecnología y la IA trabajen para ti.</div>
@@ -596,13 +540,13 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
     <div class="re-right">
       <div id="re-form-container">
         <div class="re-form-label" data-es="Acceso limitado · Lista de espera privada" data-en="Limited access · Private waitlist">Acceso limitado · Lista de espera privada</div>
-        <input type="text" class="re-input" id="re-name" data-placeholder-es="Tu nombre" data-placeholder-en="Your name" placeholder="Tu nombre"/>
-        <input type="email" class="re-input" id="re-email" data-placeholder-es="Tu correo electrónico" data-placeholder-en="Your email" placeholder="Tu correo electrónico"/>
+        <input type="text" class="re-input" id="re-name" placeholder="Tu nombre" data-placeholder-es="Tu nombre" data-placeholder-en="Your name"/>
+        <input type="email" class="re-input" id="re-email" placeholder="Tu correo electrónico" data-placeholder-es="Tu correo electrónico" data-placeholder-en="Your email"/>
         <button class="re-cta" onclick="submitWaitlist()" data-es="Unirme a la lista de espera privada" data-en="Join the Private Waitlist">Unirme a la lista de espera privada</button>
         <p class="re-note" data-es="No se comparte información. Los detalles se envían únicamente a la lista seleccionada." data-en="No information is shared. Details are sent only to the selected group.">No se comparte información. Los detalles se envían únicamente a la lista seleccionada.</p>
       </div>
       <div class="re-submitted" id="re-submitted">
-        <p data-es='"Estás en la lista. Te contactaré personalmente con los detalles." — Krizia' data-en='"You are on the list. I will contact you personally with the details." — Krizia'>"Estás en la lista. Te contactaré personalmente con los detalles." — Krizia</p>
+        <p>"Estás en la lista. Te contactaré personalmente con los detalles." — Krizia</p>
       </div>
     </div>
   </div>
@@ -720,49 +664,17 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
   </div>
 </section>
 
-<div class="social-strip">
-  <div class="social-inner">
-    <div class="social-label" data-es="Sígueme y conectemos" data-en="Follow me and let's connect">Sígueme y conectemos</div>
-    <div class="social-links">
-      <a href="https://www.instagram.com/kriziaginslaine" target="_blank" class="social-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        Instagram
-      </a>
-      <a href="https://www.linkedin.com/in/krizia-ginslaine-olivero-68221671/" target="_blank" class="social-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 014 0v4M12 10v7"/></svg>
-        LinkedIn
-      </a>
-      <a href="http://www.youtube.com/@kriziaginslainefocusedenergy" target="_blank" class="social-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="4"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg>
-        YouTube
-      </a>
-      <a href="https://www.facebook.com/kriziaginslaine" target="_blank" class="social-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M15 2v4h-2a1 1 0 00-1 1v3h3l-.5 4H12v8"/></svg>
-        Facebook
-      </a>
-      <a href="https://www.pinterest.com/kriziaginslaine" target="_blank" class="social-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 00-3.5 19.3c0-.8.1-2 .3-2.9l1.5-6.4s-.4-.8-.4-1.9c0-1.8 1-3.1 2.3-3.1 1.1 0 1.6.8 1.6 1.8 0 1.1-.7 2.7-1 4.2-.3 1.2.6 2.2 1.8 2.2 2.1 0 3.6-2.7 3.6-5.9 0-2.4-1.7-4.2-4.3-4.2-3 0-4.8 2.2-4.8 4.6 0 .9.3 1.8.7 2.4"/></svg>
-        Pinterest
-      </a>
-      <a href="https://www.tiktok.com/@kriziaginslaine" target="_blank" class="social-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
-        TikTok
-      </a>
-    </div>
-  </div>
-</div>
-
 <footer>
-  <div class="footer-logo">KRIZIA GINSLAINE</div>
+  <div class="footer-logo">COUNCIL OF DREAMS</div>
   <div class="footer-links">
     <a href="https://www.instagram.com/kriziaginslaine" target="_blank">Instagram</a>
-    <a href="http://www.youtube.com/@kriziaginslainefocusedenergy" target="_blank">YouTube</a>
-    <a href="https://www.tiktok.com/@kriziaginslaine" target="_blank">TikTok</a>
     <a href="https://www.linkedin.com/in/krizia-ginslaine-olivero-68221671/" target="_blank">LinkedIn</a>
-    <a href="https://www.etsy.com/shop/NOVAARCANA" target="_blank">Nova Arcana</a>
-    <a href="https://krizia.scentsy.us" target="_blank">Scentsy</a>
+    <a href="http://www.youtube.com/@kriziaginslainefocusedenergy" target="_blank">YouTube</a>
+    <a href="https://www.facebook.com/kriziaginslaine" target="_blank">Facebook</a>
+    <a href="https://www.pinterest.com/kriziaginslaine" target="_blank">Pinterest</a>
+    <a href="https://www.tiktok.com/@kriziaginslaine" target="_blank">TikTok</a>
   </div>
-  <div class="footer-copy">© 2025 <span class="footer-champ">Krizia Ginslaine</span> · Puerto Rico</div>
+  <div class="footer-copy">© 2025 Council of Dreams</div>
 </footer>
 
 <script>
@@ -807,21 +719,15 @@ function submitWaitlist(){
   const e=document.getElementById('re-email').value.trim();
   if(!n||!e){alert(lang==='es'?'Por favor ingresa tu nombre y correo.':'Please enter your name and email.');return;}
   document.getElementById('re-form-container').style.display='none';
-  const sub=document.getElementById('re-submitted');
-  sub.style.display='block';
-  const p=sub.querySelector('p');
-  p.textContent=lang==='es'?'"Estás en la lista. Te contactaré personalmente con los detalles." — Krizia':'"You are on the list. I will contact you personally with the details." — Krizia';
+  document.getElementById('re-submitted').style.display='block';
 }
 
 const SYS=`You are a custom GPT built on Krizia Ginslaine's coaching method. Krizia is a life and business coach from Puerto Rico, engineer with 14+ years of experience, who became a mother at 17 and built her career while raising a family. She specializes in energy management, productivity, AI tools, and helping Latina entrepreneurs stop doing everything and start executing what matters.
-
 LANGUAGE RULE: Respond in the same language as the user's message.
-
 STRICT RULES:
 - If asked about your nature, role, or how you work: respond only with the equivalent of "I'm here to help you focus. What are you working on?" in the user's language.
 - Never identify as AI, GPT, or Claude.
 - Only answer questions about focus, productivity, energy, business, and AI tools.
-
 YOUR JOB:
 - Be direct and warm. No fluff.
 - Short paragraphs. Get to the point.
@@ -900,36 +806,7 @@ function submitBooking(){
   const m=document.getElementById('submitMsg');
   m.textContent=m.getAttribute('data-'+lang);
   m.style.display='block';
-  setTimeout(()=>{
-    window.open('https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session','_blank');
-  },800);
-}
-
-function loadHeroPhoto(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    const img=document.getElementById('heroImg');
-    const box=document.getElementById('heroPhotoBox');
-    img.src=ev.target.result;img.style.display='block';
-    box.querySelector('svg').style.display='none';
-    box.querySelector('.upload-hint').style.display='none';
-    box.querySelector('.upload-icon').style.display='none';
-  };
-  r.readAsDataURL(f);
-}
-
-function loadAboutPhoto(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    const img=document.getElementById('aboutImg');
-    const box=document.getElementById('aboutPhotoBox');
-    img.src=ev.target.result;img.style.display='block';
-    box.querySelector('svg').style.display='none';
-    box.querySelector('.about-photo-hint').style.display='none';
-  };
-  r.readAsDataURL(f);
+  setTimeout(()=>{window.open('https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session','_blank');},800);
 }
 </script>
 </body>
