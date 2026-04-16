@@ -317,7 +317,7 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
     <h1 data-es="Claridad.<br/>Enfoque.<br/><em>Movimiento.</em>" data-en="Clarity.<br/>Focus.<br/><em>Forward.</em>">Claridad.<br/>Enfoque.<br/><em>Movimiento.</em></h1>
     <p class="hero-sub" data-es="En una sesión de 60 minutos, identificamos tu bloqueo real, cortamos el ruido y construimos el plan que ejecutas hoy." data-en="In one 60-minute session, we identify your real block, cut the noise, and build the plan you execute today.">En una sesión de 60 minutos, identificamos tu bloqueo real, cortamos el ruido y construimos el plan que ejecutas hoy.</p>
     <div class="hero-actions">
-      <a href="#booking"><button class="btn-champ" data-es="Reserva tu Reset Session — $147" data-en="Book Your Reset Session — $147">Reserva tu Reset Session — $147</button></a>
+    <a href="https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session" target="_blank"><button class="btn-champ" data-es="Reserva tu Reset Session — $147" data-en="Book Your Reset Session — $147">Reserva tu Reset Session — $147</button></a>
       <a href="#reset-experience"><button class="btn-ghost" data-es="The Reset Experience — Lista de espera" data-en="The Reset Experience — Join Waitlist">The Reset Experience — Lista de espera</button></a>
     </div>
   </div>
@@ -330,6 +330,7 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
       <img id="heroImg" src="" alt="Krizia Ginslaine"/>
     </div>
     <input type="file" id="photoInput" accept="image/*" onchange="loadHeroPhoto(event)"/>
+
   </div>
 </section>
 
@@ -409,7 +410,7 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
         <p data-es="Después de <strong>14 años</strong>, entendí algo que nadie te dice: el problema no es que no estés haciendo suficiente. Es que estás operando sin un sistema alineado a tu energía." data-en="After <strong>14 years</strong>, I understood something nobody tells you: the problem is not that you are not doing enough. It is that you are operating without a system aligned to your energy.">Después de <strong>14 años</strong>, entendí algo que nadie te dice: el problema no es que no estés haciendo suficiente. Es que estás operando sin un sistema alineado a tu energía.</p>
         <p data-es="Hoy combino estrategia de negocio, manejo de energía e inteligencia artificial para ayudarte a generar más sin perderte en el proceso." data-en="Today I combine business strategy, energy management, and artificial intelligence to help you generate more without losing yourself in the process.">Hoy combino estrategia de negocio, manejo de energía e inteligencia artificial para ayudarte a generar más sin perderte en el proceso.</p>
         <p data-es="No necesitas hacer más. Necesitas claridad. Necesitas dirección. Necesitas moverte." data-en="You don't need to do more. You need clarity. You need direction. You need to move." style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--wine);font-style:italic;line-height:1.6;">No necesitas hacer más. Necesitas claridad. Necesitas dirección. Necesitas moverte.</p>
-        <a href="#booking" style="display:inline-block;margin-top:1.5rem;"><button class="btn-champ" data-es="Reserva tu sesión" data-en="Book Your Session">Reserva tu sesión</button></a>
+        <a href="https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session" target="_blank"><button class="btn-champ" data-es="Reserva tu sesión" data-en="Book Your Session">Reserva tu sesión</button></a>
       </div>
     </div>
   </div>
@@ -496,7 +497,7 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
           <div class="price-process-item" data-es="Recibes el link de pago y el Zoom" data-en="You receive the payment link and Zoom">Recibes el link de pago y el Zoom</div>
           <div class="price-process-item" data-es="Nos conectamos y trabajamos" data-en="We connect and get to work">Nos conectamos y trabajamos</div>
         </div>
-        <a href="#booking"><button class="btn-champ-full" data-es="Reserva tu Reset Session" data-en="Book Your Reset Session">Reserva tu Reset Session</button></a>
+        <a href="https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session" target="_blank"><button class="btn-champ-full" data-es="Reserva tu Reset Session" data-en="Book Your Reset Session">Reserva tu Reset Session</button></a>
         <p class="price-guarantee">Zoom · Pago seguro · Confirmación en 24h</p>
       </div>
     </div>
@@ -576,7 +577,7 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
           <div style="font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--champagne);margin-bottom:0.75rem;" data-es="Este programa es para ti si:" data-en="This program is for you if:">Este programa es para ti si:</div>
           <div style="font-size:0.85rem;color:rgba(253,250,245,0.6);line-height:1.9;" data-es="Ya hiciste el Reset y tienes claridad — ahora quieres implementar. Tienes un negocio funcionando pero sientes que tú corres detrás de él. Estás lista para que la tecnología y la IA trabajen para ti." data-en="You already did the Reset and have clarity — now you want to implement. You have a working business but feel like you're chasing it. You're ready for technology and AI to work for you.">Ya hiciste el Reset y tienes claridad — ahora quieres implementar. Tienes un negocio funcionando pero sientes que tú corres detrás de él. Estás lista para que la tecnología y la IA trabajen para ti.</div>
           <div style="margin-top:1.25rem;">
-            <a href="#booking"><button class="btn-champ" style="font-size:0.72rem;padding:0.85rem 1.75rem;width:100%;" data-es="Quiero saber más sobre Enfoque Dorado" data-en="I want to know more about Enfoque Dorado">Quiero saber más sobre Enfoque Dorado</button></a>
+            <a href="#booking" onclick="setTimeout(()=>{const m=document.getElementById('b-msg');if(m&&!m.value)m.value=lang==='es'?'Estoy interesada en saber más sobre Enfoque Dorado.':'I am interested in learning more about Enfoque Dorado.';},300);"><button class="btn-champ" style="font-size:0.72rem;padding:0.85rem 1.75rem;width:100%;" data-es="Quiero saber más sobre Enfoque Dorado" data-en="I want to know more about Enfoque Dorado">Quiero saber más sobre Enfoque Dorado</button></a>
           </div>
         </div>
       </div>
@@ -682,7 +683,7 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
     <div class="cta-eyebrow" data-es="La decisión" data-en="The Decision">La decisión</div>
     <h2 data-es="Deja de pensar.<br/><em>Empieza a moverte.</em>" data-en="Stop thinking.<br/><em>Start moving.</em>">Deja de pensar.<br/><em>Empieza a moverte.</em></h2>
     <p data-es="Una sesión. Una decisión. O te quedas donde estás o no." data-en="One session. One decision. You either stay where you are or you don't.">Una sesión. Una decisión. O te quedas donde estás o no.</p>
-    <a href="#booking"><button class="btn-champ" style="font-size:0.82rem;padding:1.2rem 3.5rem;letter-spacing:2.5px;position:relative;z-index:1;" data-es="Reserva tu sesión ahora" data-en="Book Your Session Now">Reserva tu sesión ahora</button></a>
+    <a href="https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session" target="_blank"><button class="btn-champ" style="font-size:0.82rem;padding:1.2rem 3.5rem;letter-spacing:2.5px;position:relative;z-index:1;" data-es="Reserva tu sesión ahora" data-en="Book Your Session Now">Reserva tu sesión ahora</button></a>
   </div>
 </section>
 
@@ -723,6 +724,20 @@ footer{background:var(--wine-deep);padding:2.5rem 5rem;display:flex;justify-cont
     </div>
   </div>
 </section>
+
+<div class="social-strip">
+  <div class="social-inner">
+    <div class="social-label" data-es="Sígueme y conectemos" data-en="Follow me and let's connect">Sígueme y conectemos</div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/kriziaginslaine" target="_blank" class="social-link">Instagram</a>
+      <a href="https://www.linkedin.com/in/krizia-ginslaine-olivero-68221671/" target="_blank" class="social-link">LinkedIn</a>
+      <a href="http://www.youtube.com/@kriziaginslainefocusedenergy" target="_blank" class="social-link">YouTube</a>
+      <a href="https://www.facebook.com/kriziaginslaine" target="_blank" class="social-link">Facebook</a>
+      <a href="https://www.pinterest.com/kriziaginslaine" target="_blank" class="social-link">Pinterest</a>
+      <a href="https://www.tiktok.com/@kriziaginslaine" target="_blank" class="social-link">TikTok</a>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-logo">KRIZIA GINSLAINE</div>
@@ -872,6 +887,9 @@ function submitBooking(){
   const m=document.getElementById('submitMsg');
   m.textContent=m.getAttribute('data-'+lang);
   m.style.display='block';
+  setTimeout(()=>{
+    window.open('https://calendly.com/incrementandotuproductividadenmenostiempo/reset-session','_blank');
+  },800);
 }
 
 function loadHeroPhoto(e){
